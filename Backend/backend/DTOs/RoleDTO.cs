@@ -2,5 +2,5 @@
 
 public class RoleDTO
 {
-    public string RoleName { get; set; } = null!;
+    public string[] RoleNames { get; set; } = null!;
 }

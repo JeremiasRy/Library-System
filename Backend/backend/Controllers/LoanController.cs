@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Models;
 using Backend.DTOs;
 using Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class LoanController : ApiBaseController
 {
     private readonly ILoanService _loanService;
     public LoanController(ILoanService loanService) => _loanService = loanService;
     
-    [HttpGet]
+    [HttpGet, Authorize(Roles = "Admin")]
     public async Task<ICollection<Loan>> GetAll([FromQuery] FilterOptions? filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
     {
         if (filter is not null)
@@ -21,22 +23,22 @@ public class LoanController : ApiBaseController
         }
         return await _loanService.GetAllAsync(page, pageSize);
     }
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
     public async Task<Loan?> Get([FromRoute] int id)
     {
         return await _loanService.GetByIdAsync(id);
     }
-    [HttpGet("user/{id:int}")]
+    [HttpGet("user/{id:int}"), Authorize(Roles = "Admin,Customer")]
     public async Task<ICollection<Loan>?> GetByUser([FromRoute] int id)
     {
         return await _loanService.GetLoansByUserAsync(id);
     }
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Admin,Customer")]
     public async Task<ICollection<Loan>?> MakeLoans([FromBody] MakeLoansDTO request)
     {
         return await _loanService.CreateAsync(request);
     }
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:int}"), Authorize(Roles = "Admin,Customer")]
     public async Task<Loan?> UpdateLoan([FromRoute] int id, [FromBody] UpdateLoanDTO request)
     {
         return await _loanService.UpdateAsync(id, request);

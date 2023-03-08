@@ -5,7 +5,7 @@ namespace Backend.Services
 {
     public interface IRoleService
     {
-        Task<IdentityResult?> AddRole(RoleDTO request);
-        Task<IdentityRole<int>?> GetRole(RoleDTO request);
+        Task<int> AddRoles(RoleDTO request);
+        Task<ICollection<IdentityRole<int>>> GetRoles(RoleDTO request);
     }
 }

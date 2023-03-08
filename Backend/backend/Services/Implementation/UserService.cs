@@ -13,6 +13,10 @@ public class UserService : IUserService
         _userManager = userManager;
         _jwtTokenService = JwtTokenService;
     }
+    public async Task<User?> GetById(int id)
+    {
+        return await _userManager.FindByIdAsync(id.ToString());
+    }
     public async Task<User?> SignUp(RegisterDTO request)
     {
         var user = new User()
@@ -24,6 +28,7 @@ public class UserService : IUserService
         };
 
         var result = await _userManager.CreateAsync(user, request.Password);
+
         if (!result.Succeeded)
         {
             return null;

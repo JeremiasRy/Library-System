@@ -4,6 +4,7 @@ using Backend.Models;
 using Backend.DTOs;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 public class BookController : CrudController<Book, BookDTO>
 {
@@ -12,7 +13,7 @@ public class BookController : CrudController<Book, BookDTO>
     {
         _bookService = bookService;
     }
-    [HttpGet("filter")]
+    [HttpGet("filter"), Authorize(Roles = "Customer")]
     public async Task<ICollection<Book>?> GetBooksByFilter([FromQuery] int? category, [FromQuery] int? publisher, [FromQuery] string? title)
     {
         if (category is not null)
@@ -29,17 +30,17 @@ public class BookController : CrudController<Book, BookDTO>
         }
         return await base.GetAll();
     }
-    [HttpPost("{id:int}/categories")]
+    [HttpPost("{id:int}/categories"), Authorize(Roles = "Customer")]
     public async Task<bool> AddCategoryToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddCategoryToBook(id, request);
     }
-    [HttpPost("{id:int}/authors")]
+    [HttpPost("{id:int}/authors"), Authorize(Roles = "Customer")]
     public async Task<bool> AddAuthorToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddAuthorToBook(id, request);
     }
-    [HttpPost("{id:int}/publishers")]
+    [HttpPost("{id:int}/publishers"), Authorize(Roles = "Customer")]
     public async Task<bool> AddPublisherToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddPublisherToBook(id, request);

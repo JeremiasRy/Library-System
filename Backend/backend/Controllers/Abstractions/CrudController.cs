@@ -1,8 +1,10 @@
 ﻿namespace Backend.Controllers;
 
 using Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+[Authorize]
 public abstract class CrudController<TModel, TDto> : ApiBaseController
 {
     private readonly ICrudService<TModel, TDto> _service;
@@ -25,12 +27,12 @@ public abstract class CrudController<TModel, TDto> : ApiBaseController
     {
         return await _service.CreateAsync(request);
     }
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:int}"), Authorize(Roles = "Admin")]
     public virtual async Task<TModel?> Update([FromRoute] int id, [FromBody] TDto request)
     {
         return await _service.UpdateAsync(id, request);
     }
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:int}"), Authorize(Roles = "Admin")]
     public virtual async Task<bool> Delete([FromRoute] int id)
     {
         return await _service.DeleteAsync(id);
