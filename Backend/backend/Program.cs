@@ -47,17 +47,6 @@ builder.Services
         };
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("UserOnlyUpdatesOwnLoans", policy =>
-    {
-        policy.RequireAssertion(handler =>
-        {
-            handler.
-        })
-    })
-})
-
 builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<ICrudService<Author, AuthorDTO>, AuthorService>();
@@ -114,16 +103,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
-        if (dbContext is not null)
-        {
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
-        }
-
-    }
     app.UseSwagger();
     app.UseSwaggerUI();
 }
