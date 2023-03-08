@@ -31,7 +31,7 @@ public class UserController : ApiBaseController
     {
         return await _service.SignIn(request);
     }
-    [HttpPost("roles")]
+    [HttpPost("roles"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddRole(RoleDTO request)
     {
         var amountAdded = await _roleService.AddRoles(request);
