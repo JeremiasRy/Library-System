@@ -47,6 +47,17 @@ builder.Services
         };
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserOnlyUpdatesOwnLoans", policy =>
+    {
+        policy.RequireAssertion(handler =>
+        {
+            handler.
+        })
+    })
+})
+
 builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<ICrudService<Author, AuthorDTO>, AuthorService>();
@@ -93,11 +104,10 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
-
 
 var app = builder.Build();
 

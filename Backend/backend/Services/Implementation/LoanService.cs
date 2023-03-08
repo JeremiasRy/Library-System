@@ -101,6 +101,10 @@ public class LoanService : ILoanService
         {
             return null;
         }
+        if (loan.UserId != request.UserId)
+        {
+            return null;
+        }
         if (request.Returned)
         {
             var copy = await _dbContext.Copies.SingleOrDefaultAsync(copy => copy.Id == loan.CopyId);
