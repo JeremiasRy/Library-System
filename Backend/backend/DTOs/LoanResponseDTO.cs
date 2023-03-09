@@ -5,7 +5,7 @@ using Backend.Models;
 public class LoanResponseDTO
 {
     public int Id { get; set; }
-    public UserResponseDTO SignUpResponse { get; set; } = null!;
+    public UserResponseDTO User { get; set; } = null!;
     public Copy Copy { get; set; } = null!;
     public DateTime LoanedAt { get; set; }
     public DateTime DueDate { get; set; }
@@ -16,7 +16,7 @@ public class LoanResponseDTO
         return new LoanResponseDTO()
         {
             Id = loan.Id,
-            SignUpResponse = UserResponseDTO.FromUser(loan.User),
+            User = UserResponseDTO.FromUser(loan.User),
             Copy = loan.Copy,
             LoanedAt = loan.LoanedAt,
             DueDate = loan.DueDate,
