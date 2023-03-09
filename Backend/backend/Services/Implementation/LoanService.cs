@@ -26,17 +26,16 @@ public class LoanService : ILoanService
         }
 
         var copies = await _dbContext.Copies
-            .Where(copy => request.CopyIds.Contains(copy.Id))
+            .Where(copy => request.CopyIds.Contains(copy.Id) && copy.IsAvailable)
             .ToListAsync();
-
+        
         if (copies is null)
         {
             return null;
         }
-
         copies.ForEach(copy => copy.IsAvailable = false);
 
-        IEnumerable<Loan> loans = copies
+        var loans = copies
             .Select(copy => new Loan()
             {
                 CopyId = copy.Id,
@@ -48,7 +47,10 @@ public class LoanService : ILoanService
         _dbContext.AddRange(loans);
         await _dbContext.SaveChangesAsync();
 
-        return loans.ToList();
+        return await _dbContext.Loans
+            .AsNoTracking()
+            .Where(loan => copies.Select(c => c.Id).Contains(loan.CopyId))
+            .ToListAsync();
     }
 
     public async Task<ICollection<Loan>> GetAllAsync(int page = 1, int pageSize = 50)
@@ -69,7 +71,7 @@ public class LoanService : ILoanService
     {
         return await _dbContext.Loans
             .AsNoTracking()
-            .Where(loan => loan.ShouldBeReturned)
+            .Where(loan => DateTime.Now > loan.DueDate)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

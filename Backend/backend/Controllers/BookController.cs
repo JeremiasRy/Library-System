@@ -14,8 +14,12 @@ public class BookController : CrudController<Book, BookDTO>
         _bookService = bookService;
     }
     [HttpGet("filter"), Authorize(Roles = "Customer")]
-    public async Task<ICollection<Book>?> GetBooksByFilter([FromQuery] int? category, [FromQuery] int? publisher, [FromQuery] string? title)
+    public async Task<ICollection<Book>?> GetBooksByFilter([FromQuery] int? category, [FromQuery] int? publisher, [FromQuery] string? title, [FromQuery] int? author)
     {
+        if (author is not null)
+        {
+            return await _bookService.GetBooksByAuthor((int)author);
+        }
         if (category is not null)
         {
             return await _bookService.GetBooksByCategory((int)category);

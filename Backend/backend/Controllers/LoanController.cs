@@ -13,15 +13,19 @@ public class LoanController : ApiBaseController
     public LoanController(ILoanService loanService) => _loanService = loanService;
     
     [HttpGet, Authorize(Roles = "Admin")]
-    public async Task<ICollection<Loan>> GetAll([FromQuery] FilterOptions? filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
+    public async Task<ICollection<LoanResponseDTO>> GetAll([FromQuery] FilterOptions? filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
     {
+        ICollection<Loan> loans = new List<Loan>();
         if (filter is not null)
         {
-            return filter == FilterOptions.Expired 
+            loans = filter == FilterOptions.Expired 
                 ? await _loanService.GetExpiredLoansAsync(page, pageSize) 
                 : await _loanService.GetOnGoingLoansAsync(page, pageSize);
+
+            return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
         }
-        return await _loanService.GetAllAsync(page, pageSize);
+        loans = await _loanService.GetAllAsync(page, pageSize);
+        return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
     [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
     public async Task<Loan?> Get([FromRoute] int id)
@@ -34,9 +38,14 @@ public class LoanController : ApiBaseController
         return await _loanService.GetLoansByUserAsync(id);
     }
     [HttpPost, Authorize(Roles = "Admin,Customer")]
-    public async Task<ICollection<Loan>?> MakeLoans([FromBody] MakeLoansDTO request)
+    public async Task<ICollection<LoanResponseDTO>?> MakeLoans([FromBody] MakeLoansDTO request)
     {
-        return await _loanService.CreateAsync(request);
+        var loans = await _loanService.CreateAsync(request);
+        if (loans == null)
+        {
+            return null;
+        }
+        return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
     [HttpPut("{id:int}"), Authorize(Roles = "Admin,Customer")]
     public async Task<Loan?> UpdateLoan([FromRoute] int id, [FromBody] UpdateLoanDTO request)

@@ -13,7 +13,8 @@ public class Book : BaseModel
     public ICollection<Category> Categories { get; set; } = null!;
     public ICollection<Author> Authors { get; set; } = null!;  
     public ICollection<Copy> Copies { get; set; } = null!;
-    public ICollection<Publisher> Publishers { get; set; } = null!;
+    [NotMapped]
+    public ICollection<Publisher>? Publishers { get => Copies?.Select(c => c.Publisher).Distinct().ToList(); }
     [NotMapped]
     public int CopiesAvailable { get => Copies == null ? 0 : Copies.Where(copy => copy.IsAvailable).Count(); }
 }

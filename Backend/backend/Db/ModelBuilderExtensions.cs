@@ -59,10 +59,6 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Book>()
             .Navigation(book => book.Copies)
             .AutoInclude();
-
-        modelBuilder.Entity<Book>()
-            .Navigation(book => book.Publishers)
-            .AutoInclude();
     }
     public static void AddLoanConfig(this ModelBuilder modelBuilder)
     {

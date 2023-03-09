@@ -18,5 +18,6 @@ public class User : IdentityUser<int>
     [NotMapped]
     [JsonIgnore]
     public string Fullname => $"{Firstname} {Lastname}";
+    [JsonIgnore]
     public ICollection<Loan> Loans { get; set; } = null!;   
 }

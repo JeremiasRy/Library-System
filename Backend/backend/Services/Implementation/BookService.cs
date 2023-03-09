@@ -86,7 +86,7 @@ public class BookService : DbCrudService<Book, BookDTO>, IBookService
     {
         return await _dbContext.Books
             .AsNoTracking()
-            .Where(book => book.Publishers.Select(publisher => publisher.Id).Contains(publisherId))
+            .Where(book => book.Copies.Select(copy => copy.PublisherId).Contains(publisherId))
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

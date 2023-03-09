@@ -12,4 +12,10 @@ public class AuthorService : DbCrudService<Author, AuthorDTO>
     public AuthorService(AppDbContext dbContext) : base(dbContext)
     {
     }
+    public override async Task<Author?> GetByIdAsync(int id)
+    {
+        return await _dbContext.Authors
+            .Include(author => author.Books)
+            .FirstAsync(c => c.Id == id);
+    }
 }

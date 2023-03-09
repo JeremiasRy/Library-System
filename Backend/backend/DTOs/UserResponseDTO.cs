@@ -2,15 +2,15 @@
 
 using Backend.Models;
 
-public class SignUpResponseDTO
+public class UserResponseDTO
 {
     public int Id { get; set; }
     public string Username { get; set; } = null!;
     public string Firstname { get; set; } = null!;
     public string Lastname { get; set; } = null!;
-    public static SignUpResponseDTO FromUser(User user)
+    public static UserResponseDTO FromUser(User user)
     {
-        return new SignUpResponseDTO()
+        return new UserResponseDTO()
         {
             Id = user.Id,
             Username = user.UserName,

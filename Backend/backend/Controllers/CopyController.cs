@@ -3,6 +3,9 @@
 using Backend.Models;
 using Backend.DTOs;
 using Backend.Services;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 public class CopyController : CrudController<Copy, CopyDTO>
 {

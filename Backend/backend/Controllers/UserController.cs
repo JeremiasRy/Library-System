@@ -17,14 +17,14 @@ public class UserController : ApiBaseController
         _roleService = roleService;
     }
     [HttpPost("register"), AllowAnonymous]
-    public async Task<SignUpResponseDTO?> SignUp(RegisterDTO request)
+    public async Task<UserResponseDTO?> SignUp(RegisterDTO request)
     {
         var result = await _service.SignUp(request);
         if (result is null)
         {
             return null;
         }
-        return SignUpResponseDTO.FromUser(result);
+        return UserResponseDTO.FromUser(result);
     }
     [HttpPost("login"), AllowAnonymous]
     public async Task<SignInResponseDTO?> Login(CredentialsDTO request)
