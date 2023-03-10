@@ -10,7 +10,12 @@ using Microsoft.AspNetCore.Authorization;
 public class LoanController : ApiBaseController
 {
     private readonly ILoanService _loanService;
-    public LoanController(ILoanService loanService) => _loanService = loanService;
+    private readonly IJwtTokenService _jwtTokenService;
+    public LoanController(ILoanService loanService, IJwtTokenService jwtTokenService)
+    {
+        _loanService = loanService;
+        _jwtTokenService = jwtTokenService;
+    }
     
     [HttpGet, Authorize(Roles = "Admin")]
     public async Task<ICollection<LoanResponseDTO>> GetAll([FromQuery] FilterOptions? filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
@@ -35,6 +40,15 @@ public class LoanController : ApiBaseController
     [HttpGet("user/{id:int}"), Authorize(Roles = "Admin,Customer")]
     public async Task<ICollection<Loan>?> GetByUser([FromRoute] int id)
     {
+        Request.Headers.TryGetValue("Authorization", out var token);
+        var jwtToken = _jwtTokenService.ReadToken(token[0].Replace("Bearer ", string.Empty));
+        if (int.TryParse(jwtToken.Subject, out int userId))
+        {
+            if (userId != id)
+            {
+                return null;
+            }
+        }
         return await _loanService.GetLoansByUserAsync(id);
     }
     [HttpPost, Authorize(Roles = "Admin,Customer")]

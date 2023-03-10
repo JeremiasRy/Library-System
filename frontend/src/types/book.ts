@@ -7,14 +7,10 @@ import { Publisher } from "./publisher";
 export interface Book extends Base {
     title:string,
     description: null | string,
-    categories: Category[],
-    authors: Author[],
-    publishers: Publisher[]
-    copies: Copy[],
-    copiesAvailable:number
+    categories: Category[] | null,
+    authors: Author[] | null,
+    publishers: Publisher[] | null,
+    copies: Copy[] | null,
+    copiesAvailable:number | null
 };
-export interface UpdateBook extends Base {
-    title:string,
-    description: string | null,
-}
-export type PostBook = Omit<UpdateBook, "id">;
+export type PostBook = Omit<Book, "id" | "categories" | "authors" | "publishers" | "copies" | "copiesAvailable">;

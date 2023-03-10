@@ -2,7 +2,7 @@ import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
 import { getAllBooks } from './redux/reducers/bookReducer';
-import { login } from './redux/reducers/userReducer';
+import { login, logout, register } from './redux/reducers/userReducer';
 
 function App() {
   const books = useAppSelector(state => state.book);
@@ -10,10 +10,11 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (user !== null) {
-      dispatch(getAllBooks(null));
-    } 
+    dispatch(register({username: "testDude2", firstname:"Piia", lastname: "Pitkänen", email: "jahas@gmail.com", password: "zuccini"}))
   }, [])
+
+  console.log(books);
+  console.log(user);
 
   return (
     <div className="App">

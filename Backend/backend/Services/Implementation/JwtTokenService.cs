@@ -51,4 +51,9 @@ public class JwtTokenService : IJwtTokenService
 
         return SignInResponseDTO.CreateResponse(user, writer.WriteToken(token), expiration, roles);
     }
+    public JwtSecurityToken ReadToken(string token)
+    {
+        var writer = new JwtSecurityTokenHandler();
+        return writer.ReadJwtToken(token);
+    }
 }

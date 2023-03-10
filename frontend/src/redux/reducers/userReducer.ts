@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SignIn, User } from "../../types/user";
+import { SignIn, SignUp, User } from "../../types/user";
 import { baseUrl } from "./baseActions";
 
 const initialState:User | null = null as User | null
@@ -36,5 +36,20 @@ export const login = createAsyncThunk(
         } catch (e:any) {
             console.log(e);
         }
+    }
+)
+export const register = createAsyncThunk(
+    "register",
+    async (form:SignUp) => {
+        try {
+            let result = await axios.post(`${baseUrl}Users/register`, form);
+            if (result.status === 204) {
+                throw new Error("Register failed");
+            }
+            //Info succesful register and proceed to login
+            console.log(result.data);
+        } catch (e:any) {
+            console.log(e);
+        }   
     }
 )

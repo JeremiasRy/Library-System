@@ -6,3 +6,7 @@ export interface Copy extends Base {
     title:string,
     publisher: Publisher,
 }
+export type PostCopy = {
+    bookId:number,
+    publisherId:number,
+}

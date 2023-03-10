@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
+import { AsyncThunk, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";

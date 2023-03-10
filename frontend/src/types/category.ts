@@ -6,3 +6,5 @@ export interface Category extends Base {
     description: null | string,
     books: null | Book[]
 }
+export type UpdateCategory = Omit<Category, "books">;
+export type CreateCategory = Omit<UpdateCategory, "id">;

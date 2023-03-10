@@ -28,6 +28,7 @@ public class UserService : IUserService
         };
 
         var result = await _userManager.CreateAsync(user, request.Password);
+        await _userManager.AddToRoleAsync(user, "Customer");
 
         if (!result.Succeeded)
         {
