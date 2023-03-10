@@ -12,6 +12,8 @@ export type SignIn = {
     password:string
 };
 export interface User extends Base {
+    token:string,
+    expiresAt:Date,
     username:string,
     firstname:string,
     lastname:string,

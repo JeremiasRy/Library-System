@@ -20,7 +20,7 @@ const bookReducer = createSlice({
         });
         builder.addCase(updateBook.fulfilled, (_, action) => {
             return action.payload;
-        })
+        });
     }
 })
 

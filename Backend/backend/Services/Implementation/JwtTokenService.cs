@@ -49,10 +49,6 @@ public class JwtTokenService : IJwtTokenService
 
         var writer = new JwtSecurityTokenHandler();
 
-        return new SignInResponseDTO()
-        {
-            Token = writer.WriteToken(token),
-            ExpiresAt = expiration
-        };
+        return SignInResponseDTO.CreateResponse(user, writer.WriteToken(token), expiration, roles);
     }
 }

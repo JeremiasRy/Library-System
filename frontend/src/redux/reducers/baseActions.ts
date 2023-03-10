@@ -2,19 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";
+import { RootState } from "../store";
 
-const baseUrl = process.env.REACT_APP_BACKEND_URL;
+export const baseUrl = "https://localhost:7073/";
 
 export function getAll<T>(endpoint:string, name:string) {
     return createAsyncThunk(
         name,
         async (pagination:Pagination | null, thunkAPI) => {
             try {
-                let state = thunkAPI.getState();
+                let state:RootState = thunkAPI.getState() as RootState;
                 let response = await axios.get(
                     `${baseUrl}${endpoint}`, 
                     {
-                        headers: { Authorization: `Bearer ` }, 
+                        headers: { Authorization: `Bearer ${state.user?.token}` }, 
                         params: pagination === null ? {} : { page: pagination.page, pageSize: pagination.pageSize }
                     })
                 return response.data as T[]

@@ -1,13 +1,34 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { User } from "../types/user";
+import bookReducer from "./reducers/bookReducer";
+import userReducer from "./reducers/userReducer";
 
+let preUser:User | null = null as User | null;
+let user = localStorage.getItem("user");
 
+const preLoadedState = {
+    user: preUser
+}
+
+if (preUser === null) {
+    preUser = JSON.parse(user as string);
+}
 function saveState(state:RootState) {
-    throw new Error();
+    try {
+        let user = JSON.stringify(state.user);
+        localStorage.setItem("user", user);
+    } catch {
+        console.log("Something went wrong while loading session")
+    }
 };
 
 export const createStore = () => {
     return configureStore({
-        reducer: {}
+        reducer: {
+            book: bookReducer,
+            user: userReducer
+        },
+        preloadedState: preLoadedState
     });
 };
 
