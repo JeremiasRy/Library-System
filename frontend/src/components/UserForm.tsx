@@ -4,6 +4,7 @@ import { login, register } from "../redux/reducers/userReducer";
 import { FormType, SignIn, SignUp } from "../types/user";
 import Button from "./Button";
 import InputText from "./inputText";
+import { PasswordWarnings } from "./PasswordWarnings";
 
 export function UserForm(props:FormType) {
     const dispatch = useAppDispatch();
@@ -56,6 +57,7 @@ export function UserForm(props:FormType) {
                 <InputText label="Firstname" style="standard" type="text" state={firstname} setState={setFirstname} />
                 <InputText label="Lastname" style="standard" type="text" state={lastname} setState={setLastname} />
                 <InputText label="Password" style="standard" type="password" state={password} setState={setPassword}/>
+                <PasswordWarnings password={password}/>
                 </>}
             </div>
             <div className="user-form__submit-button">
