@@ -1,6 +1,8 @@
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { useState, useEffect } from 'react'
+import { UserForm } from './components/UserForm';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
+import { LoginRegister } from './pages/LoginRegister';
 import { getAllBooks } from './redux/reducers/bookReducer';
 import { login, logout, register } from './redux/reducers/userReducer';
 
@@ -10,7 +12,6 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(register({username: "testDude2", firstname:"Piia", lastname: "Pitkänen", email: "jahas@gmail.com", password: "zuccini"}))
   }, [])
 
   console.log(books);
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <LoginRegister/>
     </div>
   )
 }

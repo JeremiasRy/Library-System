@@ -1,10 +1,10 @@
-import { StateInput } from "../types/inputProps"
+import { TextInput } from "../types/inputProps"
 
-export default function InputText(props:StateInput) {
+export default function InputText(props:TextInput) {
     return (
         <label>
             {props.label}
-            <input className={`input ${props.style}`} value={props.state} onChange={(e) => props.setState(e.currentTarget.value)} />
+            <input type={props.type} className={`input ${props.style}`} value={props.state} onChange={(e) => props.setState(e.currentTarget.value)} />
         </label>
         
     )

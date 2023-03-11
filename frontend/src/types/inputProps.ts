@@ -1,17 +1,16 @@
-import { Base, HasTitle } from "./base"
+import { HasTitle } from "./base"
 
 export type BaseComponent = {
     label:string,
     style:string
 }
 
-export type HasKey = {
-    key:number
-}
-
 export interface StateInput extends BaseComponent {
     state:string,
     setState:React.Dispatch<React.SetStateAction<string>>,
+}
+export interface TextInput extends StateInput {
+    type: "text" | "password" | "email"
 }
 
 export interface Clickable extends BaseComponent {
