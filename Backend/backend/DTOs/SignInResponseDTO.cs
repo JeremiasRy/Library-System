@@ -4,6 +4,7 @@ using Backend.Models;
 
 public class SignInResponseDTO
 {
+    public int Id { get; set; }
     public string Username { get; set; } = null!;
     public string Firstname { get; set; } = null!;
     public string Lastname { get; set; } = null!;
@@ -15,6 +16,7 @@ public class SignInResponseDTO
     {
         return new SignInResponseDTO
         {
+            Id = user.Id,
             Username = user.UserName,
             Firstname = user.Firstname,
             Lastname = user.Lastname,

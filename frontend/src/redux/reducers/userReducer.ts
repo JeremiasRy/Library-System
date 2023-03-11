@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { SignIn, SignUp, User } from "../../types/user";
+import { RootState } from "../store";
 import { baseUrl } from "./baseActions";
 
 const initialState:User | null = null as User | null
@@ -51,5 +52,23 @@ export const register = createAsyncThunk(
         } catch (e:any) {
             console.log(e);
         }   
+    }
+)
+export const checkAuth = createAsyncThunk(
+    "checkAuthorization",
+    async (_, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.get(`${baseUrl}Users`,
+            {
+                headers: { Authorization: `Bearer ${state.user?.token}`}
+            });
+            if (result.status === 403) {
+                //info session expired
+                thunkAPI.dispatch(logout());
+            }
+        } catch (e:any) {
+
+        }
     }
 )

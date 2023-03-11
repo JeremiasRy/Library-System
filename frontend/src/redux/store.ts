@@ -13,7 +13,12 @@ let preUser:User | null = null as User | null;
 const user = localStorage.getItem("user");
 
 if (preUser === null) {
-    preUser = JSON.parse(user as string);
+    try {
+        preUser = JSON.parse(user as string);
+    } catch {
+        console.log("Something went wrong while loading session");
+    }
+    
 }
 
 function saveState(state:RootState) {
@@ -21,7 +26,7 @@ function saveState(state:RootState) {
         let user = JSON.stringify(state.user);
         localStorage.setItem("user", user);
     } catch {
-        console.log("Something went wrong while loading session")
+        console.log("Something went wrong while loading session");
     }
 };
 const preLoadedState = {

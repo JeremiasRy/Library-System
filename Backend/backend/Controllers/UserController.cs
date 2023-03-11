@@ -16,6 +16,11 @@ public class UserController : ApiBaseController
         _service = service;
         _roleService = roleService;
     }
+    [HttpGet, Authorize]
+    public IActionResult CheckAuthorization()
+    {
+        return Ok();
+    }
     [HttpPost("register"), AllowAnonymous]
     public async Task<UserResponseDTO?> SignUp(RegisterDTO request)
     {

@@ -14,6 +14,12 @@ const loanReducer = createSlice({
         builder.addCase(getAllLoans.fulfilled, (_, action) => {
             return action.payload;
         })
+        builder.addCase(getLoanById.fulfilled, (_, action) => {
+            return action.payload;
+        })
+        builder.addCase(getLoansByUser.fulfilled, (_, action) => {
+            return action.payload;
+        })
     },
 })
 

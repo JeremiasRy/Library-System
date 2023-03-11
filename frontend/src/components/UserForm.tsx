@@ -3,7 +3,7 @@ import { useAppDispatch } from "../hooks/reduxHook";
 import { login, register } from "../redux/reducers/userReducer";
 import { FormType, SignIn, SignUp } from "../types/user";
 import Button from "./Button";
-import InputText from "./inputText";
+import InputText from "./InputText";
 import { PasswordWarnings } from "./PasswordWarnings";
 
 export function UserForm(props:FormType) {
@@ -39,11 +39,14 @@ export function UserForm(props:FormType) {
             }
             dispatch(register(newUser));
         }
-        clearFields();
+        setTimeout(() => {
+            clearFields();
+        }, 500);
     }
 
     return (
         <div className="user-form">
+            <h1>{props.type === "Login" ? "Login" : "Sing up for a library experience!"}</h1>
             <div className="user-form__inputs-wrapper">
                 {props.type === "Login" && 
                 <>

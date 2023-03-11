@@ -28,12 +28,13 @@ export function getAll<T>(endpoint:string, name:string) {
 export function get<T>(endpoint:string, name:string) {
     return createAsyncThunk(
         name,
-        async (id:number) => {
+        async (id:number, thunkAPI) => {
             try {
+                let state:RootState = thunkAPI.getState() as RootState;
                 let response = await axios.get(
                     `${baseUrl}${endpoint}/${id}`,
                     {
-                        headers: { Authorization: `Bearer ` }
+                        headers: { Authorization: `Bearer ${state.user?.token}` }
                     })
                 return response.data as T[];
             } catch (e:any) {

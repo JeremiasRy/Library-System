@@ -1,25 +1,40 @@
-import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
-import { useState, useEffect } from 'react'
-import { UserForm } from './components/UserForm';
-import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
-import { LoginRegister } from './pages/LoginRegister';
-import { getAllBooks } from './redux/reducers/bookReducer';
-import { login, logout, register } from './redux/reducers/userReducer';
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import BookPage from "./pages/Book"
+import Books from "./pages/Books"
+import Main from "./pages/Main"
+import Profile from "./pages/Profile"
+import Root from "./pages/Root"
 
 function App() {
-  const books = useAppSelector(state => state.book);
-  const user = useAppSelector(state => state.user);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-  }, [])
-
-  console.log(books);
-  console.log(user);
-
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          path: "/",
+          element: <Main />,
+          children: [
+            {
+              path: "books",
+              element: <Books />
+            },
+            {
+              path: "books/:id",
+              element: <BookPage />
+            },
+            {
+              path: "profile",
+              element: <Profile />
+            }
+          ]
+        }
+      ]
+    }
+  ])
   return (
     <div className="App">
-      <LoginRegister/>
+      <RouterProvider router={router}/>
     </div>
   )
 }

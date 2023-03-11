@@ -11,6 +11,6 @@ export function PasswordWarnings(props: {password:string}) {
         return false;
     }
     return (
-        <p>{longEnough() && "Password is not long enough"}{!hasUppercase() && " Add a uppercase letter to your password"}</p>
+        <p>{longEnough() && "Password is not long enough"}<br/>{!hasUppercase() && " Add a uppercase letter to your password"}</p>
     )
 }

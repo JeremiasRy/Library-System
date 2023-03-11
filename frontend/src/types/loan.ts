@@ -6,8 +6,8 @@ import { User } from "./user";
 export interface Loan extends Base {
     user:User,
     copy:Copy,
-    LoanedAt:Date,
-    DueDate:Date,
+    loanedAt:Date,
+    dueDate:Date,
     returned:boolean
 }
 
