@@ -1,7 +1,12 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { User } from "../types/user";
+import authorReducer from "./reducers/authorReducer";
 import bookReducer from "./reducers/bookReducer";
 import categoryReducer from "./reducers/categoryReducer";
+import copyReducer from "./reducers/copyReducer";
+import loanReducer from "./reducers/loanReducer";
+import notificationReducer from "./reducers/notificationReducer";
+import publisherReducer from "./reducers/publisherReducer";
 import userReducer from "./reducers/userReducer";
 
 let preUser:User | null = null as User | null;
@@ -28,7 +33,12 @@ export const createStore = () => {
         reducer: {
             book: bookReducer,
             user: userReducer,
-            category: categoryReducer
+            category: categoryReducer,
+            author: authorReducer,
+            publisher: publisherReducer,
+            copy: copyReducer,
+            loan: loanReducer,
+            notification: notificationReducer
         },
         preloadedState: preLoadedState
     });

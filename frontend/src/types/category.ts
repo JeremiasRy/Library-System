@@ -1,8 +1,7 @@
-import { Base } from "./base";
+import { HasTitle } from "./base";
 import { Book } from "./book";
 
-export interface Category extends Base {
-    title:string,
+export interface Category extends HasTitle {
     description: null | string,
     books: null | Book[]
 }

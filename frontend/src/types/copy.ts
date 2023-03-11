@@ -1,7 +1,7 @@
-import { Base } from "./base";
+import { HasTitle } from "./base";
 import { Publisher } from "./publisher";
 
-export interface Copy extends Base {
+export interface Copy extends HasTitle {
     isAvailable:boolean,
     title:string,
     publisher: Publisher,
