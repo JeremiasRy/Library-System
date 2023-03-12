@@ -1,4 +1,4 @@
-import { Loan } from "../types/loan";
+import { Loan } from "../../types/loan";
 
 export default function LoanCard(props: {loan:Loan}) {
     return (

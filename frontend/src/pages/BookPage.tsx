@@ -17,7 +17,7 @@ export default function BookPage() {
     if (Array.isArray(book)) {
         return <>Loading...</>
     }
-    console.log(book);
+
     return (
         <div className="book-page">
             <div className="book-page__headers">
