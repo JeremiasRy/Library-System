@@ -1,4 +1,4 @@
-import { Clickable } from "../types/inputProps";
+import { Clickable } from "../../types/inputProps";
 
 export default function Button(props:Clickable) {
     return (

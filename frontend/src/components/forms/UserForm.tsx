@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useAppDispatch } from "../hooks/reduxHook";
-import { login, register } from "../redux/reducers/userReducer";
-import { FormType, SignIn, SignUp } from "../types/user";
-import Button from "./Button";
-import InputText from "./InputText";
-import { PasswordWarnings } from "./PasswordWarnings";
+import { useAppDispatch } from "../../hooks/reduxHook";
+import { login, register } from "../../redux/reducers/userReducer";
+import { FormType, SignIn, SignUp } from "../../types/user";
+import Button from "../inputs/Button";
+import InputText from "../inputs/InputText";
+import { PasswordWarnings } from "../PasswordWarnings";
 
 export function UserForm(props:FormType) {
     const dispatch = useAppDispatch();

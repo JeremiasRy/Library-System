@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
-import BookForm from "../components/BookForm";
+import BookForm from "../components/forms/BookForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getBookById } from "../redux/reducers/bookReducer";
 import { Book } from "../types/book";

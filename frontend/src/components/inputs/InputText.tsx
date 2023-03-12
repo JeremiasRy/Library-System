@@ -1,4 +1,4 @@
-import { TextInput } from "../types/inputProps"
+import { TextInput } from "../../types/inputProps"
 
 export default function InputText(props:TextInput) {
     return (

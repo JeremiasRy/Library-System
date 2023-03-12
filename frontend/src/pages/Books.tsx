@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import BookCard from "../components/BookCard";
-import BookForm from "../components/BookForm";
+import BookCard from "../components/cards/BookCard";
+import BookForm from "../components/forms/BookForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getAllBooks } from "../redux/reducers/bookReducer";
 import { Pagination } from "../types/pagination";

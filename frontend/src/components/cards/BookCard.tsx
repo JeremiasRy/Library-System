@@ -1,4 +1,4 @@
-import { Book } from "../types/book";
+import { Book } from "../../types/book";
 import { useNavigate } from "react-router-dom";
 
 export default function BookCard(props: {book:Book}) {

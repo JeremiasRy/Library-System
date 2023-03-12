@@ -1,7 +1,7 @@
-import { HasTitle } from "../types/base";
-import { SelectInput } from "../types/inputProps";
+import { HasTitleAndDescription } from "../../types/base";
+import { SelectInput } from "../../types/inputProps";
 
-export function Select<T extends HasTitle>(props:SelectInput<T>) {
+export function Select<T extends HasTitleAndDescription>(props:SelectInput<T>) {
 
     function options() {
         return props.options.map(option => <option key={option.id}>{option.title}</option>)

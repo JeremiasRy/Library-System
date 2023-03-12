@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import { UserForm } from "../components/UserForm";
+import Button from "../components/inputs/Button";
+import { UserForm } from "../components/forms/UserForm";
 import { FormType } from "../types/user";
 
 export function LoginRegister() {

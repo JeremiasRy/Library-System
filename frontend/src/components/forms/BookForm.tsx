@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../hooks/reduxHook";
-import { createBook, updateBook } from "../redux/reducers/bookReducer";
-import { Book } from "../types/book";
-import Button from "./Button";
-import InputText from "./InputText";
+import { useAppDispatch } from "../../hooks/reduxHook";
+import { createBook, updateBook } from "../../redux/reducers/bookReducer";
+import { Book } from "../../types/book";
+import Button from "../inputs/Button";
+import InputText from "../inputs/InputText";
 
 export default function BookForm(props: {updateObject:Book | null}) {
     const dispatch = useAppDispatch();
