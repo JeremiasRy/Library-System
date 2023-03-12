@@ -63,12 +63,11 @@ export const checkAuth = createAsyncThunk(
             {
                 headers: { Authorization: `Bearer ${state.user?.token}`}
             });
-            if (result.status === 403) {
-                //info session expired
+            if (result.status === 401) {
                 thunkAPI.dispatch(logout());
             }
         } catch (e:any) {
-
+            thunkAPI.dispatch(logout());
         }
     }
 )

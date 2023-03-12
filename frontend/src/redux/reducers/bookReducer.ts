@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Book, PostBook } from "../../types/book";
+import { Book, PostBook, } from "../../types/book";
 import { create, get, getAll, remove, update } from "./baseActions";
 
 const initialState:Book[] = [];

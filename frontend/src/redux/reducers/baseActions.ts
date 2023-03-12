@@ -1,4 +1,4 @@
-import { AsyncThunk, createAsyncThunk } from "@reduxjs/toolkit"
+import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";
@@ -46,32 +46,39 @@ export function get<T>(endpoint:string, name:string) {
 export function create<TNew, TReturn>(endpoint:string, name:string) {
     return createAsyncThunk(
         name,
-        async (newItem:TNew) => {
-            let result = await axios.post(
-                `${baseUrl}${endpoint}`,
-                {
-                    newItem
-                },
-                {
-                    headers: { Authorization: `Bearer `}
-                }
-            )
-            return result.data as TReturn[]
+        async (newItem:TNew, thunkAPI) => {
+            try {
+                let state:RootState = thunkAPI.getState() as RootState;
+                let result = await axios.post(
+                    `${baseUrl}${endpoint}`,
+                    {
+                        ...newItem
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${state.user?.token}`}
+                    }
+                )
+                return result.data as TReturn[]
+            } catch(e:any) {
+                console.log(e);
+            }
+            
         }
     )
 }
 export function update<TUp extends Base>(endpoint:string, name:string) {
     return createAsyncThunk(
         name,
-        async (updateItem:TUp) => {
+        async (updateItem:TUp, thunkAPI) => {
             try {
+                let state:RootState = thunkAPI.getState() as RootState;
                 let result = await axios.put(
                     `${baseUrl}${endpoint}/${updateItem.id}`,
                     {
-                        updateItem
+                        ...updateItem
                     },
                     {
-                        headers: { Authorization: `Bearer `}
+                        headers: { Authorization: `Bearer ${state.user?.token}`}
                     }
                 );
                 return result.data as TUp[];
@@ -84,12 +91,13 @@ export function update<TUp extends Base>(endpoint:string, name:string) {
 export function remove<T extends Base>(endpoint:string, name:string) {
     return createAsyncThunk(
         name,
-        async (item:T) => {
+        async (item:T, thunkAPI) => {
             try {
+                let state:RootState = thunkAPI.getState() as RootState;
                 let result = await axios.delete(
                     `${baseUrl}${endpoint}/${item.id}`,
                     {
-                        headers: {Authorization: `Bearer `}
+                        headers: {Authorization: `Bearer ${state.user?.token}`}
                     }
                 )
                 if (result.data) {

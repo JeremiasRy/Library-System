@@ -1,4 +1,4 @@
-import { HasTitle } from "./base"
+import { HasTitleAndDescription } from "./base"
 
 export type BaseComponent = {
     label:string,
@@ -17,6 +17,6 @@ export interface Clickable extends BaseComponent {
     onClick:VoidFunction
 }
 
-export interface SelectInput<T extends HasTitle> extends StateInput {
+export interface SelectInput<T extends HasTitleAndDescription> extends StateInput {
     options:T[]
 }

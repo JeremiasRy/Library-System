@@ -1,11 +1,10 @@
 import { Author } from "./author";
-import { Base, HasTitle } from "./base";
+import { HasTitleAndDescription } from "./base";
 import { Category } from "./category";
 import { Copy } from "./copy";
 import { Publisher } from "./publisher";
 
-export interface Book extends HasTitle {
-    description: null | string,
+export interface Book extends HasTitleAndDescription {
     categories: Category[] | null,
     authors: Author[] | null,
     publishers: Publisher[] | null,

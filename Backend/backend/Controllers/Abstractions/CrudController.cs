@@ -3,7 +3,6 @@
 using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 [Authorize]
 public abstract class CrudController<TModel, TDto> : ApiBaseController
 {

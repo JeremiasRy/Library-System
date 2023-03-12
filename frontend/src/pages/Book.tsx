@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
+import BookForm from "../components/BookForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getBookById } from "../redux/reducers/bookReducer";
 import { Book } from "../types/book";
@@ -16,7 +17,17 @@ export default function BookPage() {
     if (Array.isArray(book)) {
         return <>Loading...</>
     }
+    console.log(book);
     return (
-        <>{book.title}</>
+        <div className="book-page">
+            <div className="book-page__headers">
+                <h4>{book.title}</h4>
+            </div>
+            <div className="book-page__edit-form">
+                <h5>Edit book</h5>
+                <BookForm updateObject={book} />
+            </div>
+        </div>
+        
     )
 }
