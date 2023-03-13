@@ -1,8 +1,9 @@
+import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
-import BookForm from "../components/forms/BookForm";
+import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { getBookById } from "../redux/reducers/bookReducer";
+import { createBook, getBookById, updateBook } from "../redux/reducers/bookReducer";
 import { Book } from "../types/book";
 
 export default function BookPage() {
@@ -25,7 +26,7 @@ export default function BookPage() {
             </div>
             <div className="book-page__edit-form">
                 <h5>Edit book</h5>
-                <BookForm updateObject={book} />
+                <TitleAndDescriptionForm updateObject={book} dispatchCreate={null} dispatchUpdate={updateBook as AsyncThunk<Book[] | undefined, unknown, {}> | null}/>
             </div>
         </div>
         

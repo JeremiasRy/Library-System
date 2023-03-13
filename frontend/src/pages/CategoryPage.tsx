@@ -1,9 +1,11 @@
+import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
 import BookCard from "../components/cards/BookCard";
+import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getBooksByCategory } from "../redux/reducers/bookReducer";
-import { getCategoryById } from "../redux/reducers/categoryReducer";
+import { getCategoryById, updateCategory } from "../redux/reducers/categoryReducer";
 import { Category } from "../types/category";
 
 export default function CategoryPage() {
@@ -17,7 +19,7 @@ export default function CategoryPage() {
         dispatch(getCategoryById(parseInt(id as string)))
     }, [id]);
 
-    if (Array.isArray(category)) {
+    if (Array.isArray(category) || !Array.isArray(books)) {
         return <>Loading...</>
     }
 
@@ -30,7 +32,9 @@ export default function CategoryPage() {
             <div className="category-page__books-wrapper">
                 {books.map(book => <BookCard book={book}/>)}
             </div>
-            
+            <div className="category-page__edit-category-form">
+                <TitleAndDescriptionForm updateObject={category} dispatchCreate={null} dispatchUpdate={updateCategory as AsyncThunk<Category[] | undefined, unknown, {}> | null}/>
+            </div>
         </div>
     )
 }

@@ -1,12 +1,14 @@
+import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import BookCard from "../components/cards/BookCard";
-import BookForm from "../components/forms/BookForm";
+import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { getAllBooks } from "../redux/reducers/bookReducer";
+import { createBook, getAllBooks } from "../redux/reducers/bookReducer";
+import { Book } from "../types/book";
 import { Pagination } from "../types/pagination";
 
 export default function Books() {
-    const [pagination, setPagegination] = useState<Pagination>({page: 1, pageSize: 50});
+    const [pagination, setPagination] = useState<Pagination>({page: 1, pageSize: 50});
     const user = useAppSelector(state => state.user);
     const books = useAppSelector(state => state.book);
     const dispatch = useAppDispatch();
@@ -25,7 +27,7 @@ export default function Books() {
                 {books.map(book => <BookCard key={book.id} book={book} />)}
             </div>
             <div className="books-page__add-book">
-                <BookForm updateObject={null}/>
+                <TitleAndDescriptionForm updateObject={null} dispatchCreate={createBook as AsyncThunk<Book[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
             </div>
         </div>
     )
