@@ -15,7 +15,7 @@ export default function Books() {
 
     useEffect(() => {
         dispatch(getAllBooks(pagination))
-    }, [books])
+    }, [])
 
     if (!Array.isArray(books)) {
         return <>Loading...</>;

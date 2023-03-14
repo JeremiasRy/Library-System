@@ -1,17 +1,10 @@
-import { useEffect } from "react";
-import LoanCard from "../components/cards/LoanCard";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { getLoansByUser } from "../redux/reducers/loanReducer";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../hooks/reduxHook";
 
 export default function Profile() {
     const user = useAppSelector(state => state.user);
-    const loans = useAppSelector(state => state.loan);
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(getLoansByUser(user?.id as number));
-    }, [user]) 
-
+    const navigate = useNavigate();
+    
     return (
         <div className="profile-page">
             <div className="progile-page__header">
@@ -19,12 +12,8 @@ export default function Profile() {
             </div>
             <div className="profile-page__actions">
                 <div>
-                    
+                    <h4 onClick={() => navigate("/loans")}>Your loans</h4>
                 </div>
-            </div>
-            <div className="profile-page__loans-wrapper">
-                <h4>Your loans</h4>
-                {loans.length === 0 ? <p>No loans to show</p> : loans.map(loan => <LoanCard key={loan.id} loan={loan} />)}
             </div>
         </div>
     )

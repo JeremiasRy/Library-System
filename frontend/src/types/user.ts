@@ -18,6 +18,7 @@ export interface User extends Base {
     firstname:string,
     lastname:string,
     email:string,
+    roles:string[]
 }
 export interface FormType {
     type: "Login" | "SignUp"

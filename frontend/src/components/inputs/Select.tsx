@@ -4,7 +4,7 @@ import { SelectInput } from "../../types/inputProps";
 export function Select<T extends HasTitleAndDescription>(props:SelectInput<T>) {
 
     function options() {
-        return props.options.map(option => <option key={option.id}>{option.title}</option>)
+        return props.options.map(option => <option key={option.id} value={option.id}>{option.title}</option>)
     }
     
     return (

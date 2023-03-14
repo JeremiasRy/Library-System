@@ -24,21 +24,21 @@ public class LoanController : ApiBaseController
         if (filter is not null)
         {
             loans = filter == FilterOptions.Expired 
-                ? await _loanService.GetExpiredLoansAsync(page, pageSize) 
-                : await _loanService.GetOnGoingLoansAsync(page, pageSize);
+                ? await _loanService.GetExpiredLoansAsync(null, page, pageSize) 
+                : await _loanService.GetOnGoingLoansAsync(null, page, pageSize);
 
             return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
         }
         loans = await _loanService.GetAllAsync(page, pageSize);
         return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
-    [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
+    [HttpGet("{id:int}"), Authorize(Roles = "Admin,Customer")]
     public async Task<Loan?> Get([FromRoute] int id)
     {
         return await _loanService.GetByIdAsync(id);
     }
     [HttpGet("user/{id:int}"), Authorize(Roles = "Admin,Customer")]
-    public async Task<ICollection<Loan>?> GetByUser([FromRoute] int id)
+    public async Task<ICollection<LoanResponseDTO>?> GetByUser([FromRoute] int id, [FromQuery] FilterOptions? filter, [FromQuery] int page = 1, [FromQuery] int pageSize = 50)
     {
         Request.Headers.TryGetValue("Authorization", out var token);
         var jwtToken = _jwtTokenService.ReadToken(token[0].Replace("Bearer ", string.Empty));
@@ -49,7 +49,17 @@ public class LoanController : ApiBaseController
                 return null;
             }
         }
-        return await _loanService.GetLoansByUserAsync(id);
+        ICollection<Loan> loans = new List<Loan>();
+        if (filter is not null)
+        {
+            loans = filter == FilterOptions.Expired
+                ? await _loanService.GetExpiredLoansAsync(id, page, pageSize)
+                : await _loanService.GetOnGoingLoansAsync(id, page, pageSize);
+
+            return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
+        }
+        loans = await _loanService.GetLoansByUserAsync(id);
+        return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
     [HttpPost, Authorize(Roles = "Admin,Customer")]
     public async Task<ICollection<LoanResponseDTO>?> MakeLoans([FromBody] MakeLoansDTO request)

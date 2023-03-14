@@ -12,8 +12,9 @@ export interface Loan extends Base {
 }
 
 export type LoanFilter = {
-    filter: "OnGoing" | "Expired",
-    pagination: Pagination | null
+    filter: "OnGoing" | "Expired" | null,
+    pagination: Pagination | null,
+    userId: number |null
 }
 
 export type MakeLoan = {

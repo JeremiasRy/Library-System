@@ -67,11 +67,12 @@ public class LoanService : ILoanService
         return await _dbContext.FindAsync<Loan>(id);
     }
 
-    public async Task<ICollection<Loan>> GetExpiredLoansAsync(int page = 1, int pageSize = 50)
+    public async Task<ICollection<Loan>> GetExpiredLoansAsync(int? userId,int page = 1, int pageSize = 50)
     {
         return await _dbContext.Loans
             .AsNoTracking()
             .Where(loan => DateTime.Now > loan.DueDate)
+            .Where(loan => userId == null ? true : loan.UserId == userId)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -85,11 +86,12 @@ public class LoanService : ILoanService
             .ToListAsync();
     }
 
-    public async Task<ICollection<Loan>> GetOnGoingLoansAsync(int page = 1, int pageSize = 50)
+    public async Task<ICollection<Loan>> GetOnGoingLoansAsync(int? userId, int page = 1, int pageSize = 50)
     {
         return await _dbContext.Loans
             .AsNoTracking()
             .Where(loan => !loan.Returned)
+            .Where(loan => userId == null ? true : loan.UserId == userId)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

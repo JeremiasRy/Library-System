@@ -12,7 +12,7 @@ export default function Categories() {
 
     useEffect(() => {
         dispatch(getAllCategories(null));
-    }, [categories]);
+    }, []);
 
     if (!Array.isArray(categories)) {
         return <>Loading...</>

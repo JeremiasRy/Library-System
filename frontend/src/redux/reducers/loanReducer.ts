@@ -37,6 +37,7 @@ export const getAllLoans = createAsyncThunk(
                     params: filters === null 
                     ? {} 
                     : {
+                        userId: filters?.userId,
                         filter: filters?.filter, 
                         page: filters?.pagination?.page, 
                         pageSize: filters?.pagination?.pageSize
@@ -66,25 +67,21 @@ export const getLoanById = createAsyncThunk(
 )
 export const getLoansByUser = createAsyncThunk(
     "getLoansByUser",
-    async (userId:number, thunkAPI) => {
+    async (loanFilter:LoanFilter | null, thunkAPI) => {
         try {
             let state:RootState = thunkAPI.getState() as RootState;
             let result = await axios.get(
-                `${baseUrl}Loans/user/${userId}`,
+                `${baseUrl}Loans/user/${loanFilter?.userId}`,
                 {
-                    headers: {Authorization: `Bearer ${state.user?.token}`}
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: loanFilter === null 
+                    ? {} 
+                    : {filter: loanFilter?.filter} 
                 });
             return result.data as Loan[];
         } catch (e:any) {
             console.log(e)
         }
-        let state:RootState = thunkAPI.getState() as RootState;
-        let result = await axios.get(
-            `${baseUrl}Loans/user/${userId}`,
-            {
-                headers: {Authorization: `Bearer ${state.user?.token}`}
-            });
-        return result.data as Loan[];
     }
 )
 export const makeLoan = createAsyncThunk(
