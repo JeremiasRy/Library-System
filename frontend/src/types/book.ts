@@ -12,3 +12,7 @@ export interface Book extends HasTitleAndDescription {
     copiesAvailable:number | null
 };
 export type PostBook = Omit<Book, "id" | "categories" | "authors" | "publishers" | "copies" | "copiesAvailable">;
+export type Assign = {
+    id:number,
+    addId:number
+}

@@ -34,20 +34,19 @@ public class BookController : CrudController<Book, BookDTO>
         }
         return await base.GetAll();
     }
-    [HttpPost("{id:int}/categories"), Authorize(Roles = "Customer")]
+    [HttpPost("{id:int}/categories"), Authorize(Roles = "Admin")]
     public async Task<bool> AddCategoryToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddCategoryToBook(id, request);
     }
-    [HttpPost("{id:int}/authors"), Authorize(Roles = "Customer")]
+    [HttpDelete("{id:int}/categories"), Authorize(Roles = "Admin")]
+    public async Task<bool> RemoveCategoryFromBook([FromRoute] int id, [FromQuery] int category)
+    {
+        return await _bookService.RemoveCategoryFromBook(id, category);
+    }
+    [HttpPost("{id:int}/authors"), Authorize(Roles = "Admin")]
     public async Task<bool> AddAuthorToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddAuthorToBook(id, request);
     }
-    [HttpPost("{id:int}/publishers"), Authorize(Roles = "Customer")]
-    public async Task<bool> AddPublisherToBook([FromRoute] int id, [FromBody] AddDTO request)
-    {
-        return await _bookService.AddPublisherToBook(id, request);
-    }
-
 }

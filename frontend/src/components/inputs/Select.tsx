@@ -11,7 +11,7 @@ export function Select<T extends HasTitleAndDescription>(props:SelectInput<T>) {
         <label>
             {props.label}
             <select onChange={(e) => props.setState(e.currentTarget.value)}>
-                <option>Choose One</option>
+                <option>----Choose one----</option>
                 {options()}
             </select>
         </label>

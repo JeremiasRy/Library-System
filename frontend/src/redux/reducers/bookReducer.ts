@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Book, PostBook, } from "../../types/book";
+import { Assign, Book, PostBook, } from "../../types/book";
 import { RootState } from "../store";
 import { create, get, getAll, remove, update, baseUrl } from "./baseActions";
 
@@ -53,3 +53,77 @@ export const getBooksByCategory = createAsyncThunk(
         }
     }
 );
+export const addCategoryToBook = createAsyncThunk(
+    "addCategoryToBook",
+    async (assign:Assign, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.post(
+                `${baseUrl}Books/${assign.id}/categories`,
+                {
+                    addId: assign.addId
+                },
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`}
+                }
+            )
+            if (result.data) {
+                thunkAPI.dispatch(getBookById(assign.id))
+                //notify success
+            } else {
+                //notify failure
+            }
+        } catch (e:any) {
+            console.log(e)
+        }
+    }
+);
+export const addAuthorToBook = createAsyncThunk(
+    "addAuthorToBook",
+    async (assign:Assign, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.post(
+                `${baseUrl}Books/${assign.id}/authors`,
+                {
+                    addId: assign.addId
+                },
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`}
+                }
+            )
+            if (result.data) {
+                thunkAPI.dispatch(getBookById(assign.id))
+                //notify success
+            } else {
+                //notify failure
+            }
+        } catch (e:any) {
+            console.log(e)
+        }
+    }
+);
+export const removeCategoryFromBook = createAsyncThunk(
+    "removeCategoryFromBook",
+    async (assign:Assign, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.delete(
+                `${baseUrl}Books/${assign.id}/categories`,
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: {category: assign.addId}
+                }
+            )
+            if (result.data) {
+                thunkAPI.dispatch(getBookById(assign.id));
+                //notify success
+            } else {
+                //notify failure
+            }
+        } catch (e:any) {
+            console.log(e);
+        }
+    }
+)
+

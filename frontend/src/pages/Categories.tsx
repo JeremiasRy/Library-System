@@ -7,6 +7,7 @@ import { createCategory, getAllCategories } from "../redux/reducers/categoryRedu
 import { Category } from "../types/category";
 
 export default function Categories() {
+    const user = useAppSelector(state => state.user);
     const categories = useAppSelector(state => state.category);
     const dispatch = useAppDispatch();
 
@@ -21,11 +22,12 @@ export default function Categories() {
     return (
         <div className="categories-page">
             <div className="categories-page__categories-wrapper">
-                {categories.map(category => <CategoryCard category={category} />)}
+                {categories.map(category => <CategoryCard category={category} size="large" />)}
             </div>
+            {user?.roles.includes("Admin") && 
             <div className="categories-page__add-category-form">
                 <TitleAndDescriptionForm updateObject={null} dispatchCreate={createCategory as AsyncThunk<Category[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
-            </div>
+            </div>}  
         </div>
     )
 }

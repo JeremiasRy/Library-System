@@ -26,9 +26,10 @@ export default function Books() {
             <div className="books-page__books-wrapper">
                 {books.map(book => <BookCard key={book.id} book={book} />)}
             </div>
+            {user?.roles.includes("Admin") && 
             <div className="books-page__add-book">
                 <TitleAndDescriptionForm updateObject={null} dispatchCreate={createBook as AsyncThunk<Book[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
-            </div>
+            </div>}
         </div>
     )
 }

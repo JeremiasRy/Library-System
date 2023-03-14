@@ -49,21 +49,6 @@ public class BookService : DbCrudService<Book, BookDTO>, IBookService
         await _dbContext.SaveChangesAsync();
         return true;
     }
-    public async Task<bool> AddPublisherToBook(int id, AddDTO request)
-    {
-        var book = await _dbContext.Books.SingleOrDefaultAsync(book => book.Id == id);
-        var publisher = await _dbContext.Publishers.SingleOrDefaultAsync(publisher => publisher.Id == request.AddId);
-
-        if (book is null || publisher is null)
-        {
-            return false;
-        }
-
-        book.Publishers.Add(publisher);
-        await _dbContext.SaveChangesAsync();
-        return true;
-    }
-
     public async Task<ICollection<Book>?> GetBooksByAuthor(int authorId)
     {
         return await _dbContext.Books
@@ -90,5 +75,19 @@ public class BookService : DbCrudService<Book, BookDTO>, IBookService
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
+    }
+
+    public async Task<bool> RemoveCategoryFromBook(int id, int category)
+    {
+        var book = await _dbContext.Books.FindAsync(id);
+        var ctgory = await _dbContext.Categories.FindAsync(category);
+        if (book is null || ctgory is null)
+        {
+            return false;
+        }
+
+        book.Categories.Remove(ctgory);
+        await _dbContext.SaveChangesAsync();
+        return true;
     }
 }
