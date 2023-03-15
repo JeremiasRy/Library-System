@@ -28,6 +28,7 @@ export default function AuthorPage() {
             </div>
             {user?.roles.includes("Admin") &&
             <div className="author-page__edit-author">
+                <h5>Edit author</h5>
                 <AuthorForm updateObject={author} dispatchCreate={null} dispatchUpdate={updateAuthor as AsyncThunk<Author[] | undefined, unknown, {}> | null} />
             </div>
             }

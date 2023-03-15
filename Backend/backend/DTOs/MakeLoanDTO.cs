@@ -2,8 +2,8 @@
 
 namespace Backend.DTOs;
 
-public class MakeLoansDTO
+public class MakeLoanDTO
 {
     public int UserId { get; set; }
-    public ICollection<int> CopyIds { get; set; } = null!;
+    public int CopyId { get; set; } 
 }

@@ -21,7 +21,7 @@ export default function Authors() {
     return (
         <div className="author-page">
             <div className="author-page__authors">
-                {authors.map(author => <AuthorCard key={author.id} author={author} size="large"/>)}
+                {authors.map(author => <AuthorCard key={author.id} author={author} size="small"/>)}
             </div>
             {user?.roles.includes("Admin") && 
             <div className="author-page__add-author">

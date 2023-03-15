@@ -1,27 +1,31 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"
 import AuthorCard from "../components/cards/AuthorCard";
 import CategoryCard from "../components/cards/CategoryCard";
 import AddAuthorToBookForm from "../components/forms/AddAuthorToBookForm";
 import AddCategoryToBookForm from "../components/forms/AddCategoryToBookForm";
 import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import Button from "../components/inputs/Button";
+import SelectCopy from "../components/inputs/SelectCopy";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getBookById, removeAuthorFromBook, removeCategoryFromBook, updateBook } from "../redux/reducers/bookReducer";
+import { makeLoan } from "../redux/reducers/loanReducer";
 import { Book } from "../types/book";
+import { Copy } from "../types/copy";
 
 export default function BookPage() {
     const { id } = useParams();
     const user = useAppSelector(state => state.user);
     const book = useAppSelector(state => state.book) as unknown as Book;
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const [copy, setCopy] = useState("");
+
 
     useEffect(() => {
         dispatch(getBookById(parseInt(id as string)));
     }, [id])
-
-    console.log(book);
 
     if (Array.isArray(book)) {
         return <>Loading...</>
@@ -32,6 +36,12 @@ export default function BookPage() {
     }
     function removeAuthor(author:number) {
         dispatch(removeAuthorFromBook({id:parseInt(id as string), addId: author}))
+    }
+    function loan() {
+        dispatch(makeLoan({copyId: parseInt(copy), userId: user?.id as number}));
+        setTimeout(() => {
+            navigate("/loans")
+        }, 500)
     }
 
     return (
@@ -55,6 +65,16 @@ export default function BookPage() {
                         <CategoryCard category={category} size="small" /> 
                         {user?.roles.includes("Admin") && <Button onClick={() => removeCategory(category.id)} label="Remove" style="danger" />}
                     </div>)}
+            </div>
+            <div className="book-page__make-loan">
+                {book.copies?.filter(copy => copy.isAvailable).length === 0 
+                ? <h5>Sorry no copies available for loan</h5>
+                : <><h5>Loan this book</h5>
+                <SelectCopy options={book.copies?.filter(copy => copy.isAvailable) as Copy[]} state={copy} setState={setCopy} label={"Choose a copy to loan (check id)"} />
+                <Button onClick={loan} label="Loan" style="Standard" />
+                </>
+                }
+                
             </div>
             {user?.roles.includes("Admin") && 
             <>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Loan, LoanFilter, MakeLoan, UpdateLoan } from "../../types/loan";
 import { RootState } from "../store";
 import { baseUrl } from "./baseActions";
+import { getBookById } from "./bookReducer";
 
 const initialState:Loan[] = [];
 
@@ -91,7 +92,7 @@ export const makeLoan = createAsyncThunk(
         let result = await axios.post(
             `${baseUrl}Loans`,
             {
-                request
+                ...request
             },
             {
                     headers: {Authorization: `Bearer ${state.user?.token}`}

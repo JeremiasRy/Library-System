@@ -62,7 +62,7 @@ public class LoanController : ApiBaseController
         return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
     [HttpPost, Authorize(Roles = "Admin,Customer")]
-    public async Task<ICollection<LoanResponseDTO>?> MakeLoans([FromBody] MakeLoansDTO request)
+    public async Task<ICollection<LoanResponseDTO>?> MakeLoans([FromBody] MakeLoanDTO request)
     {
         var loans = await _loanService.CreateAsync(request);
         if (loans == null)

@@ -16,7 +16,7 @@ public class LoanService : ILoanService
         _dbContext = dbContext;
     }
 
-    public async Task<ICollection<Loan>?> CreateAsync(MakeLoansDTO request)
+    public async Task<ICollection<Loan>?> CreateAsync(MakeLoanDTO request)
     {
         var user = await _dbContext.Users.SingleOrDefaultAsync(user => user.Id == request.UserId);
 
@@ -25,31 +25,29 @@ public class LoanService : ILoanService
             return null;
         }
 
-        var copies = await _dbContext.Copies
-            .Where(copy => request.CopyIds.Contains(copy.Id) && copy.IsAvailable)
-            .ToListAsync();
+        var copy = await _dbContext.Copies.SingleOrDefaultAsync(copy => copy.Id == request.CopyId);
         
-        if (copies is null)
+        if (copy is null)
         {
             return null;
         }
-        copies.ForEach(copy => copy.IsAvailable = false);
+        copy.IsAvailable = false;
 
-        var loans = copies
-            .Select(copy => new Loan()
+        var loan = new Loan()
             {
                 CopyId = copy.Id,
                 UserId = user.Id,
                 LoanedAt = DateTime.Now,
                 DueDate = DateTime.Now.AddMonths(1)
-            });
+            };
 
-        _dbContext.AddRange(loans);
+        _dbContext.Loans.Add(loan);
+
         await _dbContext.SaveChangesAsync();
 
         return await _dbContext.Loans
             .AsNoTracking()
-            .Where(loan => copies.Select(c => c.Id).Contains(loan.CopyId))
+            .Where(loan => loan.UserId == request.UserId)
             .ToListAsync();
     }
 
