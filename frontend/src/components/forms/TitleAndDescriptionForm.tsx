@@ -15,7 +15,7 @@ export default function TitleAndDescriptionForm<T extends HasTitleAndDescription
             setTitle(props.updateObject.title);
             setDescription(props.updateObject.description as string);
         }
-    }, [])
+    }, [props])
 
     function clearFields() {
         setTitle("");
@@ -28,7 +28,7 @@ export default function TitleAndDescriptionForm<T extends HasTitleAndDescription
                 title: title, 
                 description: description === "" ? null : description
             }));
-        } else if (props.dispatchUpdate !== null) {
+        } else if (props.dispatchUpdate !== null && props.dispatchCreate === null) {
             let updateItem = {
                 id: props.updateObject?.id,
                 title: title,

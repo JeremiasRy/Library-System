@@ -1,10 +1,14 @@
+import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import AuthorCard from "../components/cards/AuthorCard";
+import AuthorForm from "../components/forms/AuthorForm";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { getAuthorById } from "../redux/reducers/authorReducer";
+import { getAuthorById, updateAuthor } from "../redux/reducers/authorReducer";
 import { Author } from "../types/author";
 
 export default function AuthorPage() {
+    const user = useAppSelector(state => state.user);
     const { id } = useParams();
     const author = useAppSelector(state => state.author) as unknown as Author;
     const dispatch = useAppDispatch();
@@ -19,7 +23,14 @@ export default function AuthorPage() {
 
     return (
         <div className="author-page">
-            {author.firstname}, {author.lastname}
+            <div className="author-page__details">
+                <AuthorCard author={author} size="large" />
+            </div>
+            {user?.roles.includes("Admin") &&
+            <div className="author-page__edit-author">
+                <AuthorForm updateObject={author} dispatchCreate={null} dispatchUpdate={updateAuthor as AsyncThunk<Author[] | undefined, unknown, {}> | null} />
+            </div>
+            }
         </div>
     )
 }

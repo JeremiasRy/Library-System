@@ -16,6 +16,7 @@ export default function Categories() {
     }, []);
 
     if (!Array.isArray(categories)) {
+        dispatch(getAllCategories(null));
         return <>Loading...</>
     }
 
@@ -26,6 +27,7 @@ export default function Categories() {
             </div>
             {user?.roles.includes("Admin") && 
             <div className="categories-page__add-category-form">
+                <h5>Add a new category</h5>
                 <TitleAndDescriptionForm updateObject={null} dispatchCreate={createCategory as AsyncThunk<Category[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
             </div>}  
         </div>

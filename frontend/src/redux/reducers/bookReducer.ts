@@ -112,7 +112,30 @@ export const removeCategoryFromBook = createAsyncThunk(
                 `${baseUrl}Books/${assign.id}/categories`,
                 {
                     headers: {Authorization: `Bearer ${state.user?.token}`},
-                    params: {category: assign.addId}
+                    params: {categoryId: assign.addId}
+                }
+            )
+            if (result.data) {
+                thunkAPI.dispatch(getBookById(assign.id));
+                //notify success
+            } else {
+                //notify failure
+            }
+        } catch (e:any) {
+            console.log(e);
+        }
+    }
+)
+export const removeAuthorFromBook = createAsyncThunk(
+    "removeAuthorFromBook",
+    async (assign:Assign, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.delete(
+                `${baseUrl}Books/${assign.id}/authors`,
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: {authorId: assign.addId}
                 }
             )
             if (result.data) {

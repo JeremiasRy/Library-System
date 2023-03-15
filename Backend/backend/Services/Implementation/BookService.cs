@@ -77,16 +77,29 @@ public class BookService : DbCrudService<Book, BookDTO>, IBookService
             .ToListAsync();
     }
 
-    public async Task<bool> RemoveCategoryFromBook(int id, int category)
+    public async Task<bool> RemoveCategoryFromBook(int id, int categoryId)
     {
         var book = await _dbContext.Books.FindAsync(id);
-        var ctgory = await _dbContext.Categories.FindAsync(category);
-        if (book is null || ctgory is null)
+        var category = await _dbContext.Categories.FindAsync(categoryId);
+        if (book is null || category is null)
         {
             return false;
         }
 
-        book.Categories.Remove(ctgory);
+        book.Categories.Remove(category);
+        await _dbContext.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> RemoveAuthorFromBook(int id, int authorId)
+    {
+        var book = await _dbContext.Books.FindAsync(id);
+        var author = await _dbContext.Authors.FindAsync(authorId);
+        if (book is null || author is null)
+        {
+            return false;
+        }
+        book.Authors.Remove(author);
         await _dbContext.SaveChangesAsync();
         return true;
     }

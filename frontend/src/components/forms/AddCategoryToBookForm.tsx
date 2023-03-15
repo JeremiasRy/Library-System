@@ -5,7 +5,7 @@ import { addCategoryToBook, getBookById } from "../../redux/reducers/bookReducer
 import { getAllCategories } from "../../redux/reducers/categoryReducer";
 import { Book } from "../../types/book";
 import Button from "../inputs/Button";
-import { Select } from "../inputs/Select";
+import { SelectCategory } from "../inputs/SelectCategory";
 
 export default function AddCategoryToBookForm() {
     const { id } = useParams();
@@ -28,11 +28,11 @@ export default function AddCategoryToBookForm() {
     }
 
     return (
-        <div className="add-category-form">
-            <h5>Add category to book</h5>
-            <Select options={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title))} state={category} setState={setCategory} label={"Choose category"} style={"standard"} />
-            <Button onClick={submitAction} label={"Add category"} style={"standard"} />
-        </div>
-        )
+        <>
+        <h5>Add category to book</h5>
+        <SelectCategory options={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title))} state={category} setState={setCategory} label={"Choose category"} style={"standard"} />
+        <Button onClick={submitAction} label={"Add category"} style={"standard"} />
+        </>
+    )
 
 }

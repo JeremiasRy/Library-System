@@ -7,7 +7,8 @@ public interface IBookService : ICrudService<Book, BookDTO>
 {
     public Task<bool> AddCategoryToBook(int id, AddDTO request);
     public Task<bool> AddAuthorToBook(int id, AddDTO authorId);
-    public Task<bool> RemoveCategoryFromBook(int id, int category);
+    public Task<bool> RemoveCategoryFromBook(int id, int categoryId);
+    public Task<bool> RemoveAuthorFromBook(int id, int authorId);
     public Task<ICollection<Book>?> GetBooksByCategory(int categoryId, int page = 1, int pageSize = 50);
     public Task<ICollection<Book>?> GetBooksByAuthor(int authorId);
     public Task<ICollection<Book>?> GetBooksByPublisher(int publisherId, int page = 1, int pageSize = 50);

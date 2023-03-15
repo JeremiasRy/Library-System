@@ -40,13 +40,18 @@ public class BookController : CrudController<Book, BookDTO>
         return await _bookService.AddCategoryToBook(id, request);
     }
     [HttpDelete("{id:int}/categories"), Authorize(Roles = "Admin")]
-    public async Task<bool> RemoveCategoryFromBook([FromRoute] int id, [FromQuery] int category)
+    public async Task<bool> RemoveCategoryFromBook([FromRoute] int id, [FromQuery] int categoryId)
     {
-        return await _bookService.RemoveCategoryFromBook(id, category);
+        return await _bookService.RemoveCategoryFromBook(id, categoryId);
     }
     [HttpPost("{id:int}/authors"), Authorize(Roles = "Admin")]
     public async Task<bool> AddAuthorToBook([FromRoute] int id, [FromBody] AddDTO request)
     {
         return await _bookService.AddAuthorToBook(id, request);
+    }
+    [HttpDelete("{id:int}/authors"), Authorize(Roles = "Admin")]
+    public async Task<bool> RemoveAuthorFromBook([FromRoute] int id, [FromQuery] int authorId)
+    {
+        return await _bookService.RemoveAuthorFromBook(id, authorId);
     }
 }
