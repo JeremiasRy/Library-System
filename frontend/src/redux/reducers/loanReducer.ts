@@ -106,9 +106,11 @@ export const updateLoan = createAsyncThunk(
         try {
             let state:RootState = thunkAPI.getState() as RootState;
             let result = await axios.put(
-                `${baseUrl}Loans`,
+                `${baseUrl}Loans/${request.id}`,
                 {
-                    request
+                    returned: request.returned,
+                    dueDate: request.dueDate,
+                    userId: request.userId 
                 },
                 {
                     headers: {Authorization: `Bearer ${state.user?.token}`}

@@ -13,6 +13,7 @@ export default function Loans() {
     const [filter, setFilter] = useState<"Expired" | "OnGoing" | null>(null);
     const [adminAllUsers, setAdminAllUsers] = useState(false);
     const [pagination, setPagination] = useState<Pagination>({page: 1, pageSize: 50});
+    const [showReturned, setShowReturned] = useState(false);
 
     useEffect(() => {
         if (!adminAllUsers) {
@@ -51,9 +52,14 @@ export default function Loans() {
                 <Button onClick={() => setFilter("Expired")} label={"Expired Loans"} style={"standard"} />
                 <Button onClick={() => setFilter("OnGoing")} label={"On Going Loans"} style={"standard"} />
                 <Button onClick={() => setFilter(null)} label={"All"} style={"standard"} />
+                <Button onClick={() => setShowReturned(!showReturned)} label={showReturned ? "Show on going" : "Show returned" } style="standard" />
             </div>
             <div className="loan-page__loans-wrapper">
-                {loans.map(loan => <LoanCard loan={loan} />)}
+                {
+                    showReturned 
+                    ? loans.filter(loan => loan.returned).map(loan => <LoanCard key={loan.id} loan={loan} size="small" />)
+                    : loans.filter(loan => !loan.returned).map(loan => <LoanCard key={loan.id} loan={loan} size="small" />)
+                }
             </div>
         </div>
     )

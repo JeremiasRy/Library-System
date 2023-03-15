@@ -4,7 +4,7 @@ import { Pagination } from "./pagination";
 import { User } from "./user";
 
 export interface Loan extends Base {
-    user:User,
+    userInfo:User,
     copy:Copy,
     loanedAt:Date,
     dueDate:Date,
@@ -23,6 +23,8 @@ export type MakeLoan = {
 }
 
 export type UpdateLoan = {
+    id: number,
+    userId: number,
     returned: boolean | null,
     dueDate: Date | null
 }
