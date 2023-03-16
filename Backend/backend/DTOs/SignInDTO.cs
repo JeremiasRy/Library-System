@@ -1,6 +1,6 @@
 ﻿namespace Backend.DTOs;
 
-public class RegisterDTO
+public class SignInDTO
 {
     public string Username { get; set; } = null!;
     public string Firstname { get; set; } = null!;

@@ -1,6 +1,7 @@
 ﻿namespace Backend.Services;
 
 using Backend.DTOs;
+using Backend.DTOs.User;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,11 +14,11 @@ public class UserService : IUserService
         _userManager = userManager;
         _jwtTokenService = JwtTokenService;
     }
-    public async Task<User?> GetById(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         return await _userManager.FindByIdAsync(id.ToString());
     }
-    public async Task<User?> SignUp(RegisterDTO request)
+    public async Task<User?> SignUpAsync(SignInDTO request)
     {
         var user = new User()
         {
@@ -36,7 +37,7 @@ public class UserService : IUserService
         }
         return user;
     }
-    public async Task<SignInResponseDTO?> SignIn(CredentialsDTO request)
+    public async Task<SignInResponseDTO?> SignInAsync(CredentialsDTO request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -47,9 +48,25 @@ public class UserService : IUserService
         return await _jwtTokenService.GenerateToken(user);
 
     }
-    public async Task<bool> AssignRolesToUser(string[] roles, User user)
+    public async Task<bool> AssignRolesToUserAsync(string[] roles, User user)
     {
         var result = await _userManager.AddToRolesAsync(user, roles);
         return result.Succeeded;
+    }
+    public async Task<User?> UpdateUserAsync(UpdateUserDTO request)
+    {
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user is null)
+        {
+            return null;
+        }
+        if (request.NewPassword != null)
+        {
+            await _userManager.ChangePasswordAsync(user, request.Password, request.NewPassword);
+        }
+        request.UpdateUser(user);
+
+        await _userManager.UpdateAsync(user);
+        return user;
     }
 }

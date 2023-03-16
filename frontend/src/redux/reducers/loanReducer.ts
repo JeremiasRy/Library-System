@@ -115,7 +115,7 @@ export const updateLoan = createAsyncThunk(
                 {
                     headers: {Authorization: `Bearer ${state.user?.token}`}
                 });
-            return result.data as Loan[];
+            thunkAPI.dispatch(getLoanById(request.id));
         } catch {
 
         }

@@ -12,7 +12,7 @@ public class SignInResponseDTO
     public string Token { get; set; } = null!;
     public string[] Roles { get; set; } = null!;
     public DateTime ExpiresAt { get; set; }
-    public static SignInResponseDTO CreateResponse(User user, string token, DateTime expires, IList<string> roles)
+    public static SignInResponseDTO CreateResponse(Models.User user, string token, DateTime expires, IList<string> roles)
     {
         return new SignInResponseDTO
         {

@@ -11,7 +11,7 @@ public class LoanController : ApiBaseController
 {
     private readonly ILoanService _loanService;
     private readonly IJwtTokenService _jwtTokenService;
-    public LoanController(ILoanService loanService, IJwtTokenService jwtTokenService)
+    public LoanController(ILoanService loanService, IJwtTokenService jwtTokenService) 
     {
         _loanService = loanService;
         _jwtTokenService = jwtTokenService;
@@ -62,19 +62,24 @@ public class LoanController : ApiBaseController
         return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
     }
     [HttpPost, Authorize(Roles = "Admin,Customer")]
-    public async Task<ICollection<LoanResponseDTO>?> MakeLoans([FromBody] MakeLoanDTO request)
+    public async Task<LoanResponseDTO?> MakeLoan([FromBody] LoanDTO request)
     {
-        var loans = await _loanService.CreateAsync(request);
-        if (loans == null)
+        var loan = await _loanService.CreateAsync(request);
+        if (loan == null)
         {
             return null;
         }
-        return loans.Select(loan => LoanResponseDTO.FromLoan(loan)).ToList();
+        return LoanResponseDTO.FromLoan(loan);
     }
     [HttpPut("{id:int}"), Authorize(Roles = "Admin,Customer")]
-    public async Task<Loan?> UpdateLoan([FromRoute] int id, [FromBody] UpdateLoanDTO request)
+    public async Task<Loan?> UpdateLoan([FromRoute] int id, [FromBody] LoanDTO request)
     {
         return await _loanService.UpdateAsync(id, request);
+    }
+    [HttpDelete("{id:int}"), Authorize("Admin")]
+    public async Task<bool> DeleteLoan([FromRoute] int id)
+    {
+        return await _loanService.DeleteAsync(id);
     }
     public enum FilterOptions
     {

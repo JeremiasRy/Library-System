@@ -16,7 +16,7 @@ public class LoanService : ILoanService
         _dbContext = dbContext;
     }
 
-    public async Task<ICollection<Loan>?> CreateAsync(MakeLoanDTO request)
+    public async Task<Loan?> CreateAsync(LoanDTO request)
     {
         var user = await _dbContext.Users.SingleOrDefaultAsync(user => user.Id == request.UserId);
 
@@ -45,10 +45,17 @@ public class LoanService : ILoanService
 
         await _dbContext.SaveChangesAsync();
 
-        return await _dbContext.Loans
-            .AsNoTracking()
-            .Where(loan => loan.UserId == request.UserId)
-            .ToListAsync();
+        return loan;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var loan = await _dbContext.Loans.SingleOrDefaultAsync(loan => loan.Id == id);
+        if (loan is null)
+        {
+            return false;
+        }
+        return true;
     }
 
     public async Task<ICollection<Loan>> GetAllAsync(int page = 1, int pageSize = 50)
@@ -95,7 +102,7 @@ public class LoanService : ILoanService
             .ToListAsync();
     }
 
-    public async Task<Loan?> UpdateAsync(int id, UpdateLoanDTO request)
+    public async Task<Loan?> UpdateAsync(int id, LoanDTO request)
     {
         var loan = await _dbContext.Loans.SingleOrDefaultAsync(loan => loan.Id == id);
         

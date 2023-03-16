@@ -11,8 +11,6 @@ export default function LoanPage() {
     const loan = useAppSelector(state => state.loan) as unknown as Loan;
     const dispatch = useAppDispatch();
 
-    console.log(loan);
-
     useEffect(() => {
         dispatch(getLoanById(parseInt(id as string)))
     }, [id])

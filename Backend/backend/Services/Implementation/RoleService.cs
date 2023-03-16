@@ -8,7 +8,7 @@ public class RoleService : IRoleService
     private readonly RoleManager<IdentityRole<int>> _roleManager;
     public RoleService(RoleManager<IdentityRole<int>> roleManager) => _roleManager = roleManager;
 
-    public async Task<int> AddRoles(RoleDTO request)
+    public async Task<int> AddRolesAsync(RoleDTO request)
     {
         int addedRoles = 0;
         foreach(string role in request.RoleNames)
@@ -24,7 +24,7 @@ public class RoleService : IRoleService
         }
         return addedRoles;
     }
-    public async Task<ICollection<IdentityRole<int>>> GetRoles(RoleDTO request)
+    public async Task<ICollection<IdentityRole<int>>> GetRolesAsync(RoleDTO request)
     {
         ICollection<IdentityRole<int>> roles = new List<IdentityRole<int>>();
         foreach (var role in request.RoleNames)
