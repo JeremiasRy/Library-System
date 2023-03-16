@@ -30,7 +30,7 @@ export default function CategoryPage() {
                 <h4>Books in this category: {books.length}</h4>
             </div>
             <div className="category-page__books-wrapper">
-                {books.map(book => <BookCard book={book}/>)}
+                {books.map(book => <BookCard book={book} size="small" />)}
             </div>
             <div className="category-page__edit-category-form">
                 <TitleAndDescriptionForm updateObject={category} dispatchCreate={null} dispatchUpdate={updateCategory as AsyncThunk<Category[] | undefined, unknown, {}> | null}/>

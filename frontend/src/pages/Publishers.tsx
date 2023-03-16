@@ -27,6 +27,7 @@ export default function Publishers() {
             </div>
             {user?.roles.includes("Admin") &&
                 <div className="publisher-page__add-form">
+                    <h4>Add a publisher</h4>
                     <PublisherForm updateObject={null} dispatchCreate={createPublisher as AsyncThunk<Publisher[] | undefined, unknown, {}>} dispatchUpdate={null}/>
                 </div>
             }

@@ -28,7 +28,7 @@ export default function PublisherForm(props: {updateObject:Publisher | null, dis
 
     return (
         <>
-        <InputText type={"text"} state={publisherName} setState={setPublisherName} label={"Edit"} style={"standard"} />
+        <InputText type={"text"} state={publisherName} setState={setPublisherName} label={"Publisher name"} style={"standard"} />
         <Button onClick={submitAction} label={"Submit"} style={"standard"} />
         </>
     )

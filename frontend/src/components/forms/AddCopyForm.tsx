@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import { getBookById } from "../../redux/reducers/bookReducer";
 import { createCopy } from "../../redux/reducers/copyReducer";
 import { getAllPublishers } from "../../redux/reducers/publisherReducer";
 import { Book } from "../../types/book";
@@ -15,12 +16,14 @@ export default function AddCopyForm(props: {book:Book}) {
         dispatch(getAllPublishers(null));
     }, [])
 
-    if (!Array.isArray(publisher)) {
-        return <>Loading</>
+
+    if (!Array.isArray(publishers)) {
+        return <>Loading...</>
     }
 
     function submitAction() {
         dispatch(createCopy({bookId: props.book.id, publisherId: parseInt(publisher)}));
+        dispatch(getBookById(props.book.id));
     }
 
     return (

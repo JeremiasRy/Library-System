@@ -22,6 +22,7 @@ export default function BookPage() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [copy, setCopy] = useState("");
+    const [edit, setEdit] = useState(false);
 
 
     useEffect(() => {
@@ -80,6 +81,8 @@ export default function BookPage() {
             </div>
             {user?.roles.includes("Admin") && 
             <>
+            <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Show edit functions"} style={"standard"} />
+                {edit && <>
                 <div className="book-page__edit-form">
                     <h5>Edit book</h5>
                     <TitleAndDescriptionForm updateObject={book} dispatchCreate={null} dispatchUpdate={updateBook as AsyncThunk<Book[] | undefined, unknown, {}> | null}/>
@@ -92,8 +95,10 @@ export default function BookPage() {
                 </div>
                 <div className="book-page__add-copy-form">
                     <AddCopyForm book={book} />
-                </div>
-            </>}
+                </div> 
+                </>}
+            </>
+            }
         </div>
         
     )
