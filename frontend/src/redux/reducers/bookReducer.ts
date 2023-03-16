@@ -25,6 +25,9 @@ const bookReducer = createSlice({
         });
         builder.addCase(getBooksByCategory.fulfilled, (_, action) => {
             return action.payload;
+        });
+        builder.addCase(getBooksByPublisher.fulfilled, (_, action) => {
+            return action.payload;
         })
     }
 })
@@ -36,6 +39,23 @@ export const getBookById = get<Book>("Books", "getBookById");
 export const createBook = create<PostBook, Book>("Books", "createBook");
 export const updateBook = update<Book>("Books", "updateBook");
 export const deleteBook = remove<Book>("Books", "deleteBook");
+export const getBooksByPublisher = createAsyncThunk(
+    "getBooksByPublisher",
+    async (publisherId:number, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.get(
+                `${baseUrl}Books/filter`,
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: { publisher: publisherId }
+                });
+            return result.data as Book[];
+        } catch (e:any) {
+            console.log(e);
+        }
+    }
+);
 export const getBooksByCategory = createAsyncThunk(
     "getBooksByCategory",
     async (categoryId:number, thunkAPI) => {

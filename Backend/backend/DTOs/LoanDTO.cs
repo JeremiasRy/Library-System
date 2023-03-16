@@ -11,8 +11,6 @@ public class LoanDTO : BaseDTO<Loan>
 
     public override void UpdateModel(Loan model)
     {
-        model.UserId = UserId;
-        model.CopyId = CopyId;
         model.DueDate = DueDate;
         model.Returned = Returned;
     }

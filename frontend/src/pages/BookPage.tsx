@@ -5,6 +5,7 @@ import AuthorCard from "../components/cards/AuthorCard";
 import CategoryCard from "../components/cards/CategoryCard";
 import AddAuthorToBookForm from "../components/forms/AddAuthorToBookForm";
 import AddCategoryToBookForm from "../components/forms/AddCategoryToBookForm";
+import AddCopyForm from "../components/forms/AddCopyForm";
 import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import Button from "../components/inputs/Button";
 import SelectCopy from "../components/inputs/SelectCopy";
@@ -28,6 +29,7 @@ export default function BookPage() {
     }, [id])
 
     if (Array.isArray(book)) {
+        dispatch(getBookById(parseInt(id as string)));
         return <>Loading...</>
     }
     
@@ -87,6 +89,9 @@ export default function BookPage() {
                 </div>
                 <div className="book-page__add-author-form">
                     <AddAuthorToBookForm />
+                </div>
+                <div className="book-page__add-copy-form">
+                    <AddCopyForm book={book} />
                 </div>
             </>}
         </div>

@@ -24,7 +24,7 @@ export default function Books() {
     return (
         <div className="books-page">
             <div className="books-page__books-wrapper">
-                {books.map(book => <BookCard key={book.id} book={book} />)}
+                {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
             </div>
             {user?.roles.includes("Admin") && 
             <div className="books-page__add-book">

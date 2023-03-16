@@ -9,6 +9,8 @@ import LoanPage from "./pages/LoanPage"
 import Loans from "./pages/Loans"
 import Main from "./pages/Main"
 import Profile from "./pages/Profile"
+import PublisherPage from "./pages/PublisherPage"
+import Publishers from "./pages/Publishers"
 import Root from "./pages/Root"
 
 function App() {
@@ -56,6 +58,14 @@ function App() {
             {
               path: "authors/:id",
               element: <AuthorPage />
+            },
+            {
+              path: "publishers",
+              element: <Publishers />
+            },
+            {
+              path: "publishers/:id",
+              element: <PublisherPage />
             }
           ]
         }

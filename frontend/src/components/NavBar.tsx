@@ -10,6 +10,7 @@ export default function NavBar() {
                 <NavElement name="Profile" to ="profile" />
                 <NavElement name="Categories" to="categories" />
                 <NavElement name="Authors" to="authors" />
+                <NavElement name="Publishers" to="publishers" />
             </div>
         </div>
     )
