@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EditUserForm from "../components/forms/EditUserForm";
+import Button from "../components/inputs/Button";
 import { useAppSelector } from "../hooks/reduxHook";
+import { User } from "../types/user";
 
 export default function Profile() {
     const user = useAppSelector(state => state.user);
     const navigate = useNavigate();
+    const [edit, setEdit] = useState(false);
     
     return (
         <div className="profile-page">
@@ -11,10 +16,14 @@ export default function Profile() {
                 <h2>Hello {user?.firstname} {user?.lastname}</h2>
             </div>
             <div className="profile-page__actions">
-                <div>
-                    <h4 onClick={() => navigate("/loans")}>Your loans</h4>
-                </div>
+                <h4 onClick={() => navigate("/loans")}>Your loans</h4>
+                <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Edit information"} style={"standard"} />
             </div>
+            {edit &&
+            <div className="profile-page__edit-form">
+                <EditUserForm user={user as User} />
+            </div>
+            }
         </div>
     )
 }

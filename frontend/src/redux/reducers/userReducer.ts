@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SignIn, SignUp, User } from "../../types/user";
+import { EditUser, SignIn, SignUp, User } from "../../types/user";
 import { RootState } from "../store";
 import { baseUrl } from "./baseActions";
 
@@ -68,6 +68,30 @@ export const checkAuth = createAsyncThunk(
             }
         } catch (e:any) {
             thunkAPI.dispatch(logout());
+        }
+    }
+)
+export const editUser = createAsyncThunk(
+    "editUser",
+    async (update:EditUser, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.put(`${baseUrl}Users/${update.id}`,
+            {
+                ...update
+            },
+            {
+                headers: { Authorization: `Bearer ${state.user?.token}`}
+            });
+            if (result.data) {
+                //notify success
+                console.log(result)
+                thunkAPI.dispatch(login({email: update.email, password: update.password}))
+            } else {
+                //notify failure
+            }
+        } catch (e:any) {
+            console.log(e)
         }
     }
 )

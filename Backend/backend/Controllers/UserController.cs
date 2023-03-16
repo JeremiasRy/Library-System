@@ -58,7 +58,7 @@ public class UserController : ApiBaseController
         return await _service.AssignRolesToUserAsync(roles.Select(role => role.Name).ToArray(), user);
     }
     [HttpPut("{id:int}"), Authorize(Roles = "Admin,Customer")]
-    public async Task<UserResponseDTO?> EditUser([FromRoute] int id, [FromBody] UpdateUserDTO updateUser)
+    public async Task<bool> EditUser([FromRoute] int id, [FromBody] UpdateUserDTO updateUser)
     {
         Request.Headers.TryGetValue("Authorization", out var token);
         var jwtToken = _jwtTokenService.ReadToken(token[0].Replace("Bearer ", string.Empty));
@@ -66,14 +66,14 @@ public class UserController : ApiBaseController
         {
             if (userId != id)
             {
-                return null;
+                return false;
             }
         }
         var user = await _service.UpdateUserAsync(updateUser);
         if (user is null)
         {
-            return null;
+            return false;
         }
-        return UserResponseDTO.FromUser(user);
+        return true;
     }
 }

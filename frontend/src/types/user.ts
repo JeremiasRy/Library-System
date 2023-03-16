@@ -23,3 +23,7 @@ export interface User extends Base {
 export interface FormType {
     type: "Login" | "SignUp"
 }
+export interface EditUser extends SignUp {
+    id: number,
+    newPassword: string | null
+}
