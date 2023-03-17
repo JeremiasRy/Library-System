@@ -11,7 +11,6 @@ export function LoginRegister() {
     }
     return (
         <div className="login-page">
-            
             <Button label={type.type === "Login" ? "Register" : "Login" } onClick={onClick} style="standard"/>
             {type.type === "Login" ? <UserForm type="Login" /> : <UserForm type="SignUp"/>}
         </div>

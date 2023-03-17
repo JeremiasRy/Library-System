@@ -10,7 +10,7 @@ import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm
 import Button from "../components/inputs/Button";
 import SelectCopy from "../components/inputs/SelectCopy";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { getBookById, removeAuthorFromBook, removeCategoryFromBook, updateBook } from "../redux/reducers/bookReducer";
+import { deleteBook, getBookById, removeAuthorFromBook, removeCategoryFromBook, updateBook } from "../redux/reducers/bookReducer";
 import { makeLoan } from "../redux/reducers/loanReducer";
 import { Book } from "../types/book";
 import { Copy } from "../types/copy";
@@ -30,16 +30,24 @@ export default function BookPage() {
     }, [id])
 
     if (Array.isArray(book)) {
-        dispatch(getBookById(parseInt(id as string)));
         return <>Loading...</>
     }
     
     function removeCategory(category:number) {
         dispatch(removeCategoryFromBook({id:parseInt(id as string), addId: category}))
     }
+
     function removeAuthor(author:number) {
         dispatch(removeAuthorFromBook({id:parseInt(id as string), addId: author}))
     }
+
+    function removeBook() {
+        dispatch(deleteBook(book));
+        setTimeout(() => {
+            navigate("/books")
+        }, 500)
+    }
+
     function loan() {
         dispatch(makeLoan({copyId: parseInt(copy), userId: user?.id as number}));
         setTimeout(() => {
@@ -80,26 +88,27 @@ export default function BookPage() {
                 
             </div>
             {user?.roles.includes("Admin") && 
-            <>
+            <div className="book-page__admin-actions">
             <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Show edit functions"} style={"standard"} />
                 {edit && <>
-                <div className="book-page__edit-form">
+                <div className="edit-form">
                     <h5>Edit book</h5>
                     <TitleAndDescriptionForm updateObject={book} dispatchCreate={null} dispatchUpdate={updateBook as AsyncThunk<Book[] | undefined, unknown, {}> | null}/>
                 </div>
-                <div className="book-page__add-category-form">
+                <div className="add-category-form">
                     <AddCategoryToBookForm />
                 </div>
-                <div className="book-page__add-author-form">
+                <div className="add-author-form">
                     <AddAuthorToBookForm />
                 </div>
-                <div className="book-page__add-copy-form">
+                <div className="add-copy-form">
                     <AddCopyForm book={book} />
-                </div> 
+                </div>
+                <div>
+                    <Button onClick={removeBook} label={"Remove"} style={"danger"} />
+                </div>
                 </>}
-            </>
-            }
+            </div>}
         </div>
-        
     )
 }

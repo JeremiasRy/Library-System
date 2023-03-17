@@ -3,6 +3,7 @@ import axios from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";
 import { RootState } from "../store";
+import { getAllCategories } from "./categoryReducer";
 
 export const baseUrl = "https://localhost:7073/";
 
@@ -49,7 +50,7 @@ export function create<TNew, TReturn>(endpoint:string, name:string) {
         async (newItem:TNew, thunkAPI) => {
             try {
                 let state:RootState = thunkAPI.getState() as RootState;
-                let result = await axios.post(
+                await axios.post(
                     `${baseUrl}${endpoint}`,
                     {
                         ...newItem
@@ -58,7 +59,7 @@ export function create<TNew, TReturn>(endpoint:string, name:string) {
                         headers: { Authorization: `Bearer ${state.user?.token}`}
                     }
                 )
-                return result.data as TReturn[]
+                thunkAPI.dispatch(getAll<TReturn>(endpoint, name)(null));
             } catch(e:any) {
                 console.log(e);
             }

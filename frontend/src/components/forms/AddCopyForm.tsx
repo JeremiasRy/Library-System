@@ -9,12 +9,17 @@ import SelectPublisher from "../inputs/SelectPublisher";
 
 export default function AddCopyForm(props: {book:Book}) {
     const publishers = useAppSelector(state => state.publisher);
+    const copies = useAppSelector(state => state.copy);
     const dispatch = useAppDispatch();
     const [publisher, setPublisher] = useState("");
 
     useEffect(() => {
         dispatch(getAllPublishers(null));
     }, [])
+
+    useEffect(() => {
+        dispatch(getBookById(props.book.id))
+    }, [copies]);
 
 
     if (!Array.isArray(publishers)) {
@@ -23,7 +28,6 @@ export default function AddCopyForm(props: {book:Book}) {
 
     function submitAction() {
         dispatch(createCopy({bookId: props.book.id, publisherId: parseInt(publisher)}));
-        dispatch(getBookById(props.book.id));
     }
 
     return (

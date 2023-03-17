@@ -5,7 +5,7 @@ import { Author, CreateAuthor } from "../../types/author";
 import Button from "../inputs/Button";
 import InputText from "../inputs/InputText";
 
-export default function AuthorForm(props: {updateObject:Author | null, dispatchCreate: AsyncThunk<Author[] | undefined, CreateAuthor, {}> | null, dispatchUpdate: AsyncThunk<Author[] | undefined, unknown, {}> | null}) {
+export default function AuthorForm(props: {updateObject:Author | null, dispatchCreate: AsyncThunk<Author[] | undefined, unknown, {}> | null, dispatchUpdate: AsyncThunk<Author[] | undefined, unknown, {}> | null}) {
     const dispatch = useAppDispatch();
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");

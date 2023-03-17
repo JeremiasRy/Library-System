@@ -35,6 +35,7 @@ export default function EditUserForm(props: {user:User}) {
         }
         dispatch(editUser(updateUser));
     }
+    
     return (
         <div className="user-edit-form">
             <InputText type={"text"} state={username} setState={setUsername} label={"Username"} style={"standard"} />
