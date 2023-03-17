@@ -49,6 +49,7 @@ export default function Loans() {
 
     return (
         <div className="loan-page">
+            <h1>Loans</h1>
             <div className="loan-page__filter-options">
                 {user?.roles.includes("Admin") && <Button onClick={handleAdminAllUsersClick} label={adminAllUsers ? "Show only me" : "Show all loans on database"} style={"standard"} /> }
                 <Button onClick={() => setFilter("Expired")} label={"Expired Loans"} style={"standard"} />

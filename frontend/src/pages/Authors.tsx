@@ -26,6 +26,7 @@ export default function Authors() {
 
     return (
         <div className="author-page">
+            <h1>Authors</h1>
             <PaginationForm elementCount={authors.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize} />
             <div className="author-page__authors">
                 {authors.map(author => <AuthorCard key={author.id} author={author} size="small"/>)}

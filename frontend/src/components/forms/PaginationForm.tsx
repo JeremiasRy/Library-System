@@ -24,12 +24,15 @@ export default function PaginationForm(props: {elementCount: number, page:number
 
     return (
         <div className="pagination-form">
-            <Button onClick={pageDown} label={"<"} style={"pagination"}/>
-            <div>{props.page}</div>
-            <Button onClick={pageUp} label={">"} style={"pagination"} />
-            <select value={props.pageSize} onChange={(e) => props.setPageSize(parseInt(e.currentTarget.value))}>
-                {pageSizeOptions()}
-            </select>
+            <h4>Page</h4>
+            <div className="pagination-form__actions">
+                <Button onClick={pageDown} label={"<"} style={"pagination"}/>
+                <div>{props.page}</div>
+                <Button onClick={pageUp} label={">"} style={"pagination"} />
+                <select value={props.pageSize} onChange={(e) => props.setPageSize(parseInt(e.currentTarget.value))}>
+                    {pageSizeOptions()}
+                </select>
+            </div>
         </div>
     )
 }

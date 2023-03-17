@@ -1,0 +1,28 @@
+@import "../abstraction/mixins.scss";
+
+.main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.main__outlet-holder {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.btn {
+    @include button();
+}
+.btn:hover {
+    @include basic-hover();
+    box-shadow: 0 0 1px 1px black
+}
+
+select {
+    @include select();
+    transition: ease-in 200ms;
+}
+select:hover {
+    @include basic-hover();
+    border-bottom: 2px solid black;
+}

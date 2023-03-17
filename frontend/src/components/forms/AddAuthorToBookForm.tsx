@@ -6,6 +6,7 @@ import { addAuthorToBook, getBookById } from "../../redux/reducers/bookReducer";
 import { Book } from "../../types/book";
 import Button from "../inputs/Button";
 import SelectAuthor from "../inputs/SelectAuthor";
+import PaginationForm from "./PaginationForm";
 
 export default function addAuthorToBookForm() {
     const { id } = useParams();
@@ -13,11 +14,13 @@ export default function addAuthorToBookForm() {
     const authors = useAppSelector(state => state.author);
     const dispatch = useAppDispatch();
     const [author, setAuthor] = useState("");
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
-        dispatch(getAllAuthors(null));
+        dispatch(getAllAuthors({page: page, pageSize: pageSize}));
         dispatch(getBookById(parseInt(id as string)))
-    }, [id])
+    }, [id, page, pageSize])
 
     function submitAction() {
         dispatch(addAuthorToBook({id:parseInt(id as string), addId: parseInt(author)}))
@@ -29,7 +32,18 @@ export default function addAuthorToBookForm() {
     return (
         <>
         <h5>Add an author to book</h5>
-        <SelectAuthor options={authors.filter(author => !book.authors?.map(author => author.id).includes(author.id))} state={author} setState={setAuthor} label={"Choose author"} />
+        <PaginationForm 
+        elementCount={authors.length}
+        page={page}
+        setPage={setPage}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        />
+        <SelectAuthor 
+        options={authors.filter(author => !book.authors?.map(author => author.id).includes(author.id))} 
+        state={author} 
+        setState={setAuthor} 
+        label={"Choose author"} />
         <Button onClick={submitAction} label={"Add author"} style={"standard"} />
         </>
     )

@@ -1,0 +1,28 @@
+@import "../abstraction/mixins.scss";
+
+.books-page {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.books-page__inner-wrap {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+.book-card {
+    @include card();
+}
+.book-card:hover {
+    @include basic-hover();
+}
+.books-page__books-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 5px;
+}

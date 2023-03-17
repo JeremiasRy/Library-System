@@ -26,6 +26,7 @@ export default function Categories() {
 
     return (
         <div className="categories-page">
+            <h1>Categories</h1>
             <PaginationForm elementCount={categories.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
             <div className="categories-page__categories-wrapper">
                 {categories.map(category => <CategoryCard key={category.id} category={category} size="large" />)}

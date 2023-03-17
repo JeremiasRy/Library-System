@@ -34,7 +34,7 @@ export default function AddCategoryToBookForm() {
         <>
         <h5>Add category to book</h5>
         <PaginationForm 
-        elementCount={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title)).length} 
+        elementCount={categories.length} 
         page={page} 
         setPage={setPage} 
         pageSize={pageSize} 

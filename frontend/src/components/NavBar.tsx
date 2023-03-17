@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import NavElement from "./NavElement";
 
 export default function NavBar() {
+    const navigate = useNavigate();
     return (
         <div className="navbar">
-            <h1>My library</h1>
+            <h1 onClick={() => navigate("/")}>My library</h1>
             <div className="navbar__nav-elements">
                 <NavElement name="Books" to="books"/>
                 <NavElement name="Loans" to="loans" />

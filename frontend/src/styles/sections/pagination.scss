@@ -1,0 +1,15 @@
+.pagination-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.pagination-form h4 {
+    text-align: center;
+}
+.pagination-form__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 2em;
+    width: 100%;
+}

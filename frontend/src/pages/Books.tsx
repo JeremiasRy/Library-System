@@ -25,23 +25,24 @@ export default function Books() {
         return <>Loading...</>;
     }
 
-    console.log(`page: ${page} ||| page size: ${pageSize} ||| ${books.length}`)
-
     return (
         <div className="books-page">
-            <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
-            <div className="books-page__books-wrapper">
-                {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
+            <h1>Books</h1>
+            <div className="books-page__inner-wrap">
+                <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
+                <div className="books-page__books-wrapper">
+                    {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
+                </div>
+                {user?.roles.includes("Admin") &&
+                <div className="books-page__admin-actions">
+                <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Add a book"} style="standard"/>
+                    {edit && <>
+                        <div className="books-page__add-book">
+                            <TitleAndDescriptionForm updateObject={null} dispatchCreate={createBook as AsyncThunk<Book[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
+                        </div>
+                    </>}
+                </div>}
             </div>
-            {user?.roles.includes("Admin") &&
-            <div className="books-page__admin-actions">
-            <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Add a book"} style="standard"/>
-                {edit && <>
-                    <div className="books-page__add-book">
-                        <TitleAndDescriptionForm updateObject={null} dispatchCreate={createBook as AsyncThunk<Book[] | undefined, unknown, {}> | null} dispatchUpdate={null}/>
-                    </div>
-                </>}
-            </div>}
         </div>
     )
 }

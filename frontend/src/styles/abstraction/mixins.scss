@@ -1,0 +1,35 @@
+@import "./variables.scss";
+
+@mixin button() {
+    height: 3em;
+    min-width: 7em;
+    background-color: $base_bg_dark;
+    color: $font_color_light;
+    transition: ease-in 100ms;
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: ease-in 100ms;
+}
+
+@mixin basic-hover() {
+    cursor: pointer;
+    transition: ease-in-out 200ms;
+}
+
+@mixin select() {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: inherit;
+    padding: 5px;
+    min-width: 5em;
+}
+
+@mixin card() {
+    min-height: 10em;
+    width: 15em;
+    padding: 1em;
+    background-color: $base_bg_light_variation;
+    border-radius: 1em;
+    border: 1px $base_bg_dark solid;
+}
