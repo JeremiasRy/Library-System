@@ -1,7 +1,8 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import AuthorCard from "../components/cards/AuthorCard";
 import AuthorForm from "../components/forms/AuthorForm";
+import PaginationForm from "../components/forms/PaginationForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { createAuthor, getAllAuthors } from "../redux/reducers/authorReducer";
@@ -12,10 +13,12 @@ export default function Authors() {
     const authors = useAppSelector(state => state.author);
     const dispatch = useAppDispatch();
     const [edit, setEdit] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
 
     useEffect(() => {
-        dispatch(getAllAuthors(null))
-    }, []);
+        dispatch(getAllAuthors({page: page, pageSize: pageSize}))
+    }, [page, pageSize]);
 
     if (!Array.isArray(authors)) {
         return <>Loading...</>
@@ -23,6 +26,7 @@ export default function Authors() {
 
     return (
         <div className="author-page">
+            <PaginationForm elementCount={authors.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize} />
             <div className="author-page__authors">
                 {authors.map(author => <AuthorCard key={author.id} author={author} size="small"/>)}
             </div>

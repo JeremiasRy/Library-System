@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import LoanCard from "../components/cards/LoanCard";
+import PaginationForm from "../components/forms/PaginationForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getAllLoans, getLoansByUser } from "../redux/reducers/loanReducer";
@@ -12,13 +13,14 @@ export default function Loans() {
     const dispatch = useAppDispatch();
     const [filter, setFilter] = useState<"Expired" | "OnGoing" | null>(null);
     const [adminAllUsers, setAdminAllUsers] = useState(false);
-    const [pagination, setPagination] = useState<Pagination>({page: 1, pageSize: 50});
     const [showReturned, setShowReturned] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
 
     useEffect(() => {
         if (!adminAllUsers) {
             let loanFilter:LoanFilter = {
-                pagination: pagination,
+                pagination: {page: page, pageSize: pageSize},
                 userId: user?.id as number,
                 filter: filter,
             }
@@ -26,12 +28,12 @@ export default function Loans() {
             return;
         }
         let loanFilter:LoanFilter = {
-            pagination: pagination,
+            pagination: {page: page, pageSize: pageSize},
             userId: null,
             filter: filter,
         }
         dispatch(getAllLoans(loanFilter));
-    }, [filter, adminAllUsers, pagination]);
+    }, [filter, adminAllUsers, page, pageSize]);
 
     function handleAdminAllUsersClick() {
         setAdminAllUsers(!adminAllUsers)
@@ -54,6 +56,7 @@ export default function Loans() {
                 <Button onClick={() => setFilter(null)} label={"All"} style={"standard"} />
                 <Button onClick={() => setShowReturned(!showReturned)} label={showReturned ? "Show on going" : "Show returned" } style="standard" />
             </div>
+            <PaginationForm elementCount={loans.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize}/>
             <div className="loan-page__loans-wrapper">
                 {
                     showReturned 

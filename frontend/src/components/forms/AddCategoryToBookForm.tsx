@@ -6,6 +6,7 @@ import { getAllCategories } from "../../redux/reducers/categoryReducer";
 import { Book } from "../../types/book";
 import Button from "../inputs/Button";
 import { SelectCategory } from "../inputs/SelectCategory";
+import PaginationForm from "./PaginationForm";
 
 export default function AddCategoryToBookForm() {
     const { id } = useParams();
@@ -13,11 +14,13 @@ export default function AddCategoryToBookForm() {
     const categories = useAppSelector(state => state.category);
     const dispatch = useAppDispatch();
     const [category, setCategory] = useState<string>("");
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
-        dispatch(getAllCategories(null));
+        dispatch(getAllCategories({page: page, pageSize: pageSize}));
         dispatch(getBookById(parseInt(id as string)))
-    }, [id]);
+    }, [id, page, pageSize]);
 
     if (!Array.isArray(categories) || Array.isArray(book)) {
         return <></>;  
@@ -30,7 +33,20 @@ export default function AddCategoryToBookForm() {
     return (
         <>
         <h5>Add category to book</h5>
-        <SelectCategory options={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title))} state={category} setState={setCategory} label={"Choose category"} style={"standard"} />
+        <PaginationForm 
+        elementCount={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title)).length} 
+        page={page} 
+        setPage={setPage} 
+        pageSize={pageSize} 
+        setPageSize={setPageSize}
+        />
+        <SelectCategory 
+        options={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title))} 
+        state={category} 
+        setState={setCategory} 
+        label={"Choose category"} 
+        style={"standard"} 
+        />
         <Button onClick={submitAction} label={"Add category"} style={"standard"} />
         </>
     )

@@ -1,6 +1,7 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import BookCard from "../components/cards/BookCard";
+import PaginationForm from "../components/forms/PaginationForm";
 import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
@@ -9,22 +10,26 @@ import { Book } from "../types/book";
 import { Pagination } from "../types/pagination";
 
 export default function Books() {
-    const [pagination, setPagination] = useState<Pagination>({page: 1, pageSize: 50});
     const user = useAppSelector(state => state.user);
     const books = useAppSelector(state => state.book);
     const dispatch = useAppDispatch();
     const [edit, setEdit] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
 
     useEffect(() => {
-        dispatch(getAllBooks(pagination))
-    }, [])
+        dispatch(getAllBooks({page: page, pageSize: pageSize}))
+    }, [page, pageSize])
 
     if (!Array.isArray(books)) {
         return <>Loading...</>;
     }
 
+    console.log(`page: ${page} ||| page size: ${pageSize} ||| ${books.length}`)
+
     return (
         <div className="books-page">
+            <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
             <div className="books-page__books-wrapper">
                 {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
             </div>

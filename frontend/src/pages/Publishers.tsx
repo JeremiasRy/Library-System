@@ -1,6 +1,7 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import PublisherCard from "../components/cards/PublisherCard";
+import PaginationForm from "../components/forms/PaginationForm";
 import PublisherForm from "../components/forms/PublisherForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
@@ -12,18 +13,20 @@ export default function Publishers() {
     const publishers = useAppSelector(state => state.publisher);
     const dispatch = useAppDispatch();
     const [edit, setEdit] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
 
     useEffect(() => {
-        dispatch(getAllPublishers(null));
+        dispatch(getAllPublishers({page: page, pageSize: pageSize}));
     }, [])
 
     if (!Array.isArray(publishers)) {
-        dispatch(getAllPublishers(null));
         return <>Loading...</>;
     }
 
     return (
         <div className="publishers-page">
+            <PaginationForm elementCount={publishers.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize}/>
             <div className="publisher-page__publishers">
                 {publishers.map(publisher => <PublisherCard key={publisher.id} publisher={publisher} />)}
             </div>

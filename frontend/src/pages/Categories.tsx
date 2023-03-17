@@ -1,6 +1,7 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import CategoryCard from "../components/cards/CategoryCard";
+import PaginationForm from "../components/forms/PaginationForm";
 import TitleAndDescriptionForm from "../components/forms/TitleAndDescriptionForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
@@ -12,9 +13,11 @@ export default function Categories() {
     const categories = useAppSelector(state => state.category);
     const dispatch = useAppDispatch();
     const [edit, setEdit] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
 
     useEffect(() => {
-        dispatch(getAllCategories(null));
+        dispatch(getAllCategories({page: page, pageSize: pageSize}));
     }, []);
 
     if (!Array.isArray(categories)) {
@@ -23,6 +26,7 @@ export default function Categories() {
 
     return (
         <div className="categories-page">
+            <PaginationForm elementCount={categories.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
             <div className="categories-page__categories-wrapper">
                 {categories.map(category => <CategoryCard key={category.id} category={category} size="large" />)}
             </div>
