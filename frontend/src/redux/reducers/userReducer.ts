@@ -3,6 +3,7 @@ import axios from "axios";
 import { EditUser, SignIn, SignUp, User } from "../../types/user";
 import { RootState } from "../store";
 import { baseUrl } from "./baseActions";
+import { addNotification } from "./notificationReducer";
 
 const initialState:User | null = null as User | null
 
@@ -26,31 +27,34 @@ export const { logout } = userReducer.actions;
 
 export const login = createAsyncThunk(
     "login",
-    async (credentials:SignIn) => {
+    async (credentials:SignIn, thunkAPI) => {
         try {
+            thunkAPI.dispatch(addNotification({message: "Logging in...", timeInSec: 5, type: "normal"}))
             let result = await axios.post(`${baseUrl}Users/login`, credentials);
             if (result.status === 204) {
-                throw new Error("Login failed");
+                thunkAPI.dispatch(addNotification({message: "Failed to login, check your email and password", timeInSec: 2, type: "normal"}))
+                return;
             }
             let user:User = result.data;
+            thunkAPI.dispatch(addNotification({message: `Logged in as ${user.username}`, timeInSec: 2, type: "normal"}))
             return user;
         } catch (e:any) {
-            console.log(e);
+            thunkAPI.dispatch(addNotification({message: `Something went wrong ${e.message}`, timeInSec: 2, type: "error"}))
         }
     }
 )
 export const register = createAsyncThunk(
     "register",
-    async (form:SignUp) => {
+    async (form:SignUp, thunkAPI) => {
         try {
             let result = await axios.post(`${baseUrl}Users/register`, form);
             if (result.status === 204) {
-                throw new Error("Register failed");
+                thunkAPI.dispatch(addNotification({message: "Failed to register, check your email and password", timeInSec: 2, type: "normal"}))
+                return;
             }
-            //Info succesful register and proceed to login
-            console.log(result.data);
+            thunkAPI.dispatch(addNotification({message: "Register success please login", timeInSec: 2, type: "normal"}))
         } catch (e:any) {
-            console.log(e);
+            thunkAPI.dispatch(addNotification({message: `Something went wrong ${e.message}`, timeInSec: 2, type: "error"}))
         }   
     }
 )
@@ -65,6 +69,7 @@ export const checkAuth = createAsyncThunk(
             });
             if (result.status === 401) {
                 thunkAPI.dispatch(logout());
+                thunkAPI.dispatch(addNotification({message: "Session expired please login again", timeInSec: 2, type: "normal"}))
             }
         } catch (e:any) {
             thunkAPI.dispatch(logout());
@@ -83,15 +88,15 @@ export const editUser = createAsyncThunk(
             {
                 headers: { Authorization: `Bearer ${state.user?.token}`}
             });
+            console.log(result.data);
             if (result.data) {
-                //notify success
-                console.log(result)
-                thunkAPI.dispatch(login({email: update.email, password: update.password}))
+                thunkAPI.dispatch(addNotification({message: "Edited user information", timeInSec: 2, type: "normal"}));
+                thunkAPI.dispatch(login({email: update.email, password: update.password}));
             } else {
-                //notify failure
+                thunkAPI.dispatch(addNotification({message: "Failed to edit information", timeInSec: 2, type: "normal"}))
             }
         } catch (e:any) {
-            console.log(e)
+            thunkAPI.dispatch(addNotification({message: `Something went wrong ${e.message}`, timeInSec: 2, type: "error"}))
         }
     }
 )

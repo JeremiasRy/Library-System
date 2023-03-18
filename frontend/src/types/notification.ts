@@ -1,5 +1,5 @@
 export type Notification = {
     message:String,
-    type: "Error" | "Notification",
+    type: "error" | "normal",
     timeInSec: number
 }

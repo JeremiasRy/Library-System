@@ -6,8 +6,8 @@
     row-gap: 2em;
 }
 .main__outlet-holder {
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .btn {
@@ -15,7 +15,12 @@
 }
 .btn:hover {
     @include basic-hover();
-    box-shadow: 0 0 1px 1px black
+    box-shadow: 0 0 1px 1px rgb(214, 156, 156);
+    transform:scale(1.05);
+}
+.btn:active {
+    transform: rotate(10deg);
+    transition: ease-in 50ms;
 }
 
 select {

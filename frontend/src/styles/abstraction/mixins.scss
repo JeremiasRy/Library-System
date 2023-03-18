@@ -3,11 +3,12 @@
 @mixin button() {
     height: 3em;
     min-width: 7em;
-    background-color: $base_bg_dark;
-    color: $font_color_light;
+    background-color: $button_bg;
+    color: $font_color_dark;
+    font-weight: 900;
     transition: ease-in 100ms;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid whitesmoke;
     transition: ease-in 100ms;
 }
 
@@ -26,10 +27,20 @@
 }
 
 @mixin card() {
-    min-height: 10em;
+    perspective: 1500px;
+    min-height: 15em;
     width: 15em;
     padding: 1em;
-    background-color: $base_bg_light_variation;
+    background-color: rgba($color: $base_bg_dark, $alpha: 0.5);
+    color: $font_color_dark;
     border-radius: 1em;
-    border: 1px $base_bg_dark solid;
+    border: 1px white solid;
+    box-shadow: 0 1px 5px #00000099;
+    transition: all ease-out 200ms;
+}
+
+@mixin card-hover() {
+    background-color: desaturate($color: $base_bg_dark, $amount: 50);
+    color: adjust-hue($color: $font_color_light, $degrees: 50);
+    transition: all ease-in 200ms;
 }

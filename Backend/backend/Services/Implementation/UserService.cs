@@ -56,7 +56,7 @@ public class UserService : IUserService
     public async Task<User?> UpdateUserAsync(UpdateUserDTO request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
-        if (user is null || await _userManager.CheckPasswordAsync(user, request.Password))
+        if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
         {
             return null;
         }

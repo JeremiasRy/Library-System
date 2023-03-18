@@ -8,21 +8,25 @@
 .books-page__inner-wrap {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     row-gap: 10px;
     padding-left: 5em;
     padding-right: 5em;
 }
 .book-card {
     @include card();
+    text-align: center;
 }
 .book-card:hover {
-    @include basic-hover();
+    transition-duration: 150ms;
 }
 .books-page__books-wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    row-gap: 5px;
-    column-gap: 5px;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content:center;
+
 }
