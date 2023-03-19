@@ -4,7 +4,17 @@ import { useState } from "react";
 
 export default function BookCard(props: {book:Book, size: "small" | "large"}) {
     const navigate = useNavigate()
-    const [rotate, setRotate] = useState("");
+    const [rotateX, setRotateX] = useState(0);
+    const [rotateY, setRotateY] = useState(0);
+    const [circleX, setCircleX] = useState(0);
+    const [circleY, setCircleY] = useState(0);
+
+    function zeroRotate() {
+        setRotateX(0);
+        setRotateY(0);
+        setCircleX(0);
+        setCircleY(0);
+    }
 
     function rotateMouse(e:React.MouseEvent<HTMLDivElement, MouseEvent>) {
         const bounds = e.currentTarget.getBoundingClientRect();
@@ -16,20 +26,26 @@ export default function BookCard(props: {book:Book, size: "small" | "large"}) {
             x: leftX - bounds.width / 2,
             y: topY - bounds.height / 2
         };
-        const distance = Math.sqrt(center.x**2 + center.y**2);
-        setRotate(`rotate3d(${center.y / 100}, ${-center.x / 100}, 0, ${Math.log(distance) * 2}deg)`);
+        setRotateX(-center.x / 10);
+        setRotateY(center.y / 10);
+        setCircleX(center.x * 2 + bounds.width / 2);
+        setCircleY(center.y * 2 + bounds.height / 2);
     }
 
     return (
         <div 
-        style={rotate !== "" ? {transform: `scale3d(1.1, 1.1, 1.1) ${rotate}`} : {}}
+        style={{transform: `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`}}
         id={props.book.id.toString()}
         className={`book-card ${props.size}`} 
         onClick={() => navigate(`/books/${props.book.id.toString()}`)}  
-        onMouseLeave={() => setRotate("")}
+        onMouseLeave={zeroRotate}
         onMouseMove={rotateMouse}>
+            <div
+            style={{backgroundImage: `radial-gradient(circle at ${circleX}px ${circleY}px, #ffffff55, #0000000f)`}} 
+            className="glow">
+            </div>
             <h4>{props.book.title}</h4>
-            <em>Authors:</em> {props.book.authors?.map(author => <p key={author.id}>{`${author.firstname} ${author.lastname}`}</p>)}
+            {props.book.authors?.map(author => <p key={author.id}>{`${author.firstname} ${author.lastname}`}</p>)}
             <p>Copies available: {props.book.copiesAvailable}</p>
         </div>
     )

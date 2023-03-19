@@ -18,7 +18,17 @@
     text-align: center;
 }
 .book-card:hover {
-    transition-duration: 150ms;
+    @include card-hover();
+    transition-duration: 300ms;
+}
+.book-card .glow {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-image: radial-gradient(circle at 50% -20%, #ffffff55, #0000000f);
+
 }
 .books-page__books-wrapper {
     width: 100%;

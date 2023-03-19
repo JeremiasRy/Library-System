@@ -120,21 +120,31 @@ select:hover {
 }
 
 .book-card {
-  perspective: 1500px;
+  perspective: 5px;
   min-height: 15em;
   width: 15em;
   padding: 1em;
-  background-color: rgba(36, 21, 21, 0.5);
-  color: #1d1a15;
+  background-color: #241515;
+  color: #ecd5b7;
   border-radius: 1em;
   border: 1px white solid;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
   transition: all ease-out 200ms;
   text-align: center;
 }
 
 .book-card:hover {
-  transition-duration: 150ms;
+  cursor: pointer;
+  transform: scale3d(1.7, 1.7, 1.7);
+  transition-duration: 300ms;
+}
+
+.book-card .glow {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.3333333333), rgba(0, 0, 0, 0.0588235294));
 }
 
 .books-page__books-wrapper {
