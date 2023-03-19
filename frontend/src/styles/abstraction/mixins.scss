@@ -40,5 +40,20 @@
 
 @mixin card-hover() {
     cursor: pointer;
-    transform: scale3d(1.7, 1.7, 1.7);
+}
+
+@mixin card-small() {
+    background-color: $base_bg_dark;
+    color: $nav_font_color_light;
+    transition: all 200ms;
+    height: 3em;
+    width: 10em;
+    border-radius: 1.5em;
+}
+
+@mixin card-small-hover {
+    cursor: pointer;
+    background-color: $nav_font_color_light;
+    color: $base_bg_dark;
+    transition: all 200ms;
 }

@@ -72,10 +72,10 @@ export default function BookPage() {
             </div>
             <div className="book-page__categories">
                 {book.categories?.map(category => 
-                    <div key={category.id} className="book-page__categories__category">
-                        <CategoryCard category={category} size="small" /> 
+                    <>
+                        <CategoryCard key={category.id} category={category} size="small" /> 
                         {user?.roles.includes("Admin") && <Button onClick={() => removeCategory(category.id)} label="Remove" style="danger" />}
-                    </div>)}
+                    </>)}
             </div>
             <div className="book-page__make-loan">
                 {book.copies?.filter(copy => copy.isAvailable).length === 0 

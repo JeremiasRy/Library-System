@@ -1,0 +1,13 @@
+@import "../abstraction/mixins.scss";
+@import "../abstraction/variables.scss";
+
+.category-card-small {
+    @include card-small();
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.category-card-small:hover {
+    @include card-small-hover();
+}

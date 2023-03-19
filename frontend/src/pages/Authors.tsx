@@ -29,7 +29,7 @@ export default function Authors() {
             <h1>Authors</h1>
             <PaginationForm elementCount={authors.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize} />
             <div className="author-page__authors">
-                {authors.map(author => <AuthorCard key={author.id} author={author} size="small"/>)}
+                {authors.map(author => <AuthorCard key={author.id} author={author} size="large"/>)}
             </div>
             {user?.roles.includes("Admin") && 
             <div className="author-page__admin-actions">

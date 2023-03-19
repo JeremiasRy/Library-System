@@ -13,15 +13,15 @@
     padding-left: 5em;
     padding-right: 5em;
 }
-.book-card {
+.book-card-small {
     @include card();
     text-align: center;
 }
-.book-card:hover {
+.book-card-small:hover {
     @include card-hover();
     transition-duration: 300ms;
 }
-.book-card .glow {
+.book-card-small .glow {
     position: absolute;
     top: 0px;
     left: 0px;

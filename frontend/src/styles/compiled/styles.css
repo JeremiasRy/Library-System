@@ -119,7 +119,7 @@ select:hover {
   padding-right: 5em;
 }
 
-.book-card {
+.book-card-small {
   perspective: 5px;
   min-height: 15em;
   width: 15em;
@@ -132,13 +132,12 @@ select:hover {
   text-align: center;
 }
 
-.book-card:hover {
+.book-card-small:hover {
   cursor: pointer;
-  transform: scale3d(1.7, 1.7, 1.7);
   transition-duration: 300ms;
 }
 
-.book-card .glow {
+.book-card-small .glow {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -173,6 +172,25 @@ select:hover {
   justify-content: center;
   column-gap: 2em;
   width: 100%;
+}
+
+.category-card-small {
+  background-color: #241515;
+  color: #ecd5b7;
+  transition: all 200ms;
+  height: 3em;
+  width: 10em;
+  border-radius: 1.5em;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.category-card-small:hover {
+  cursor: pointer;
+  background-color: #ecd5b7;
+  color: #241515;
+  transition: all 200ms;
 }
 
 /*# sourceMappingURL=styles.css.map */
