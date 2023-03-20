@@ -2,21 +2,27 @@
 @import "../abstraction/mixins.scss";
 
 .navbar {
+    z-index: 3;
     position: sticky;
     top: 0px;
     left: 0px;
+    min-height: 7.5em;
+    padding-left: 2em;
+    padding-right: 2em;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: $base_bg_dark;
     border-bottom: white 1px solid;
     color: $nav_font_color_light
 }
 .navbar h1:hover {
     @include basic-hover();
-    transform: scale(1.05);
+    letter-spacing: 5px;
 }
-
+.navbar h1 {
+    transition: all ease-in 200ms;
+}
 .navbar__nav-elements {
     display: flex;
     flex-direction: row;
@@ -25,21 +31,22 @@
 }
 
 .nav-element {
-    margin: auto;
-    padding: 1em;
-    width: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 9em;
     transition: ease-in-out 200ms;
 }
 .nav-element h4 {
-    text-align: center;
-    transition: ease 100ms;
+    transition: ease 200ms;
 }
 .nav-element:hover h4 {
-    transform: scale(1.2);
+    transform: scale(1.05);
+    letter-spacing: 5px;
+    color: $font_color_dark;
     transition: transform ease-in 200ms;
 }
 .nav-element:hover {
     @include basic-hover();
-    background-color: $base_bg;
-    color: $font_color_dark;
+    background-color: $base_bg_light_variation;
 }

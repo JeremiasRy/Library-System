@@ -1,0 +1,34 @@
+@import "../abstraction/variables.scss";
+
+.closed {
+    visibility: hidden;
+    top: 0;
+    transition: all 500ms;
+}
+
+.open {
+    visibility: visible;
+    top: 14%;
+    transition: top 200ms ease-in;
+}
+.normal {
+    background-color: bisque;
+    border: 1px solid rgb(238, 146, 34);
+}
+
+.error {
+    background-color: salmon;
+    border: 1px solid rgb(238, 34, 34);
+}
+
+.notification {
+    min-height: 3em;
+    min-width: 15em;
+    border-radius: 5px;
+    position: absolute;
+    padding-left: 1em;
+    padding-right: 1em;
+    left: calc(50% - 7.5em);
+    font-weight: 700;
+    text-align: center;
+}

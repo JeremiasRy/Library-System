@@ -1,5 +1,6 @@
 @import "../abstraction/mixins.scss";
 
+
 .books-page {
     display: flex;
     flex-direction: column;
@@ -14,12 +15,25 @@
     padding-right: 5em;
 }
 .book-card-small {
-    @include card();
+    @include card(center);
     text-align: center;
 }
 .book-card-small:hover {
     @include card-hover();
     transition-duration: 300ms;
+}
+.book-card-small:hover .overlay {
+    background-color: rgba($base_bg_dark, 0);
+    transition: all 200ms ease-in;
+}
+.book-card-small:hover .book-card-small__details p {
+    font-weight: 700;
+    color: $nav_font_color_light_var1;
+    transition: all 100ms ease-in;
+}
+.book-card-small:hover .book-card-small__details h4 {
+    letter-spacing: 5px;
+    transition: all 100ms ease-in;
 }
 .book-card-small .glow {
     position: absolute;
@@ -28,7 +42,28 @@
     height: 100%;
     width: 100%;
     background-image: radial-gradient(circle at 50% -20%, #ffffff55, #0000000f);
-
+    border-radius: 1em;
+}
+.book-card-small .overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($base_bg_dark, 0.7);
+    border-radius: 1em;
+    transition: all 200ms ease-in;
+}
+.book-card-small__details {
+    position: relative;
+    z-index: 1;
+    transition: all 100ms ease-in;
+}
+.book-card-small__details h4 {
+    color: yellow
+}
+.book-card-small__details p {
+    color: $nav_font_color_light;
 }
 .books-page__books-wrapper {
     width: 100%;
@@ -38,5 +73,4 @@
     row-gap: 10px;
     column-gap: 10px;
     justify-content:center;
-
 }

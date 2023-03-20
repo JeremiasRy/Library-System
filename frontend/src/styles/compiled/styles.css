@@ -1,18 +1,46 @@
 body {
+  height: 100%;
   margin: 0;
   font-family: "Roboto";
-  background-image: linear-gradient(90deg, rgb(255, 255, 255), #f8efef 40%, #f8efef 60%, rgb(255, 255, 255));
+  background-image: url("../../../assets/book_case_tilt.jpg");
+  background-position: center;
+  background-size: fill;
+  color: #ecd5b7;
+}
+
+html {
+  height: 100%;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  row-gap: 2em;
+}
+
+.main__overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(90deg, rgba(36, 21, 21, 0.1), rgba(36, 21, 21, 0.9) 20%, rgba(36, 21, 21, 0.9) 80%, rgba(36, 21, 21, 0.1));
 }
 
 .main__outlet-holder {
   padding-left: 10%;
   padding-right: 10%;
+  min-height: 100%;
+  z-index: 2;
+}
+
+#root {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #e9e1d7;
 }
 
 .btn {
@@ -29,7 +57,7 @@ body {
 
 .btn:hover {
   cursor: pointer;
-  transition: ease-in-out 200ms;
+  transition: ease-in 200ms;
   box-shadow: 0 0 1px 1px rgb(214, 156, 156);
   transform: scale(1.05);
 }
@@ -44,24 +72,33 @@ select {
   border-left: none;
   border-right: none;
   background-color: inherit;
+  color: #ecd5b7;
   padding: 5px;
   min-width: 5em;
   transition: ease-in 200ms;
 }
 
+option {
+  color: black;
+}
+
 select:hover {
   cursor: pointer;
-  transition: ease-in-out 200ms;
+  transition: ease-in 200ms;
   border-bottom: 2px solid black;
 }
 
 .navbar {
+  z-index: 3;
   position: sticky;
   top: 0px;
   left: 0px;
+  min-height: 7.5em;
+  padding-left: 2em;
+  padding-right: 2em;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background-color: #241515;
   border-bottom: white 1px solid;
   color: #ecd5b7;
@@ -69,8 +106,12 @@ select:hover {
 
 .navbar h1:hover {
   cursor: pointer;
-  transition: ease-in-out 200ms;
-  transform: scale(1.05);
+  transition: ease-in 200ms;
+  letter-spacing: 5px;
+}
+
+.navbar h1 {
+  transition: all ease-in 200ms;
 }
 
 .navbar__nav-elements {
@@ -81,27 +122,28 @@ select:hover {
 }
 
 .nav-element {
-  margin: auto;
-  padding: 1em;
-  width: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 9em;
   transition: ease-in-out 200ms;
 }
 
 .nav-element h4 {
-  text-align: center;
-  transition: ease 100ms;
+  transition: ease 200ms;
 }
 
 .nav-element:hover h4 {
-  transform: scale(1.2);
+  transform: scale(1.05);
+  letter-spacing: 5px;
+  color: #1d1a15;
   transition: transform ease-in 200ms;
 }
 
 .nav-element:hover {
   cursor: pointer;
-  transition: ease-in-out 200ms;
-  background-color: #f8efef;
-  color: #1d1a15;
+  transition: ease-in 200ms;
+  background-color: #b6b3b3;
 }
 
 .books-page {
@@ -124,10 +166,12 @@ select:hover {
   min-height: 15em;
   width: 15em;
   padding: 1em;
-  background-color: #241515;
-  color: #ecd5b7;
+  background-image: url("../../../assets/open_book.jpg");
+  background-position: center;
+  background-size: contain;
+  color: yellow;
   border-radius: 1em;
-  border: 1px white solid;
+  border: 1px rgb(170, 166, 166) solid;
   transition: all ease-out 200ms;
   text-align: center;
 }
@@ -137,6 +181,22 @@ select:hover {
   transition-duration: 300ms;
 }
 
+.book-card-small:hover .overlay {
+  background-color: rgba(36, 21, 21, 0);
+  transition: all 200ms ease-in;
+}
+
+.book-card-small:hover .book-card-small__details p {
+  font-weight: 700;
+  color: #fffdf9;
+  transition: all 100ms ease-in;
+}
+
+.book-card-small:hover .book-card-small__details h4 {
+  letter-spacing: 5px;
+  transition: all 100ms ease-in;
+}
+
 .book-card-small .glow {
   position: absolute;
   top: 0px;
@@ -144,6 +204,32 @@ select:hover {
   height: 100%;
   width: 100%;
   background-image: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.3333333333), rgba(0, 0, 0, 0.0588235294));
+  border-radius: 1em;
+}
+
+.book-card-small .overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 21, 21, 0.7);
+  border-radius: 1em;
+  transition: all 200ms ease-in;
+}
+
+.book-card-small__details {
+  position: relative;
+  z-index: 1;
+  transition: all 100ms ease-in;
+}
+
+.book-card-small__details h4 {
+  color: yellow;
+}
+
+.book-card-small__details p {
+  color: #ecd5b7;
 }
 
 .books-page__books-wrapper {
@@ -160,6 +246,7 @@ select:hover {
   display: flex;
   flex-direction: column;
   text-align: center;
+  color: #ecd5b7;
 }
 
 .pagination-form h4 {
@@ -180,7 +267,7 @@ select:hover {
   transition: all 200ms;
   height: 3em;
   width: 10em;
-  border-radius: 1.5em;
+  border-radius: 1em;
   display: flex;
   justify-content: center;
   font-weight: 700;
@@ -191,6 +278,44 @@ select:hover {
   background-color: #ecd5b7;
   color: #241515;
   transition: all 200ms;
+}
+
+.closed {
+  visibility: hidden;
+  top: 0;
+  transition: all 500ms;
+}
+
+.open {
+  visibility: visible;
+  top: 14%;
+  transition: top 200ms ease-in;
+}
+
+.normal {
+  background-color: bisque;
+  border: 1px solid rgb(238, 146, 34);
+}
+
+.error {
+  background-color: salmon;
+  border: 1px solid rgb(238, 34, 34);
+}
+
+.notification {
+  min-height: 3em;
+  min-width: 15em;
+  border-radius: 5px;
+  position: absolute;
+  padding-left: 1em;
+  padding-right: 1em;
+  left: calc(50% - 7.5em);
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-page {
+  z-index: 2;
 }
 
 /*# sourceMappingURL=styles.css.map */

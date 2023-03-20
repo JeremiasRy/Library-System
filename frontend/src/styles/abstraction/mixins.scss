@@ -14,7 +14,7 @@
 
 @mixin basic-hover() {
     cursor: pointer;
-    transition: ease-in-out 200ms;
+    transition: ease-in 200ms;
 }
 
 @mixin select() {
@@ -22,19 +22,22 @@
     border-left: none;
     border-right: none;
     background-color: inherit;
+    color: $nav_font_color_light;
     padding: 5px;
     min-width: 5em;
 }
 
-@mixin card() {
+@mixin card($bg-position) {
     perspective: 5px;
     min-height: 15em;
     width: 15em;
     padding: 1em;
-    background-color: $base_bg_dark;
-    color: $nav_font_color_light;
+    background-image: url("../../../assets/open_book.jpg");
+    background-position:$bg-position;
+    background-size:contain;
+    color: yellow;
     border-radius: 1em;
-    border: 1px white solid;
+    border: 1px rgb(170, 166, 166) solid;
     transition: all ease-out 200ms;
 }
 
@@ -48,7 +51,7 @@
     transition: all 200ms;
     height: 3em;
     width: 10em;
-    border-radius: 1.5em;
+    border-radius: 1em;
 }
 
 @mixin card-small-hover {

@@ -47,9 +47,13 @@ export default function BookCard(props: {book:Book, size: "small" | "large"}) {
             style={{backgroundImage: `radial-gradient(circle at ${circleX}px ${circleY}px, #ffffff55, #0000000f)`}} 
             className="glow">
             </div>
-            <h4>{props.book.title}</h4>
-            {props.book.authors?.map(author => <p key={author.id}>{`${author.firstname} ${author.lastname}`}</p>)}
-            <p>Copies available: {props.book.copiesAvailable}</p>
+            <div className="overlay">
+            </div>
+            <div className={`book-card-${props.size}__details`}>
+                <h4>{props.book.title}</h4>
+                {props.book.authors?.map(author => <p key={author.id}><em>{`${author.firstname} ${author.lastname}`}</em></p>)}
+                <p>Copies available: {props.book.copiesAvailable}</p>
+            </div>
         </div>
     )
 }

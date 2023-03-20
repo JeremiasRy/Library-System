@@ -1,7 +1,10 @@
+@import "../abstraction/variables.scss";
+
 .pagination-form {
     display: flex;
     flex-direction: column;
     text-align: center;
+    color: $nav_font_color_light
 }
 .pagination-form h4 {
     text-align: center;

@@ -5,6 +5,7 @@ import { checkAuth } from "../redux/reducers/userReducer";
 import { LoginRegister } from "./LoginRegister";
 import Notification from "../components/Notification";
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 export default function Root() {
     const user = useAppSelector(state => state.user);
@@ -18,9 +19,13 @@ export default function Root() {
 
     return (
         <>
-        <Notification />
-        {user === null ? <LoginRegister /> : <Outlet />}
-        <Footer/>
+        <div className="main">
+            <div className="main__overlay"></div>
+            <Notification />
+            <NavBar />
+            {user === null ? <LoginRegister /> : <Outlet />}
+            <Footer/>
+        </div>
         </>
         
     );
