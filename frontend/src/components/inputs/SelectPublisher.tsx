@@ -9,7 +9,7 @@ export default function SelectPublisher(props: {options:Publisher[], state:strin
         <label>
             {props.label}
             <select onChange={(e) => props.setState(e.currentTarget.value)}>
-                <option>---Choose one</option>
+                <option>---Choose one---</option>
                 {options()}
             </select>
         </label>

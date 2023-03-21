@@ -1,6 +1,6 @@
 import Button from "../inputs/Button";
 
-export default function PaginationForm(props: {elementCount: number, page:number, pageSize:number, setPage:React.Dispatch<React.SetStateAction<number>>, setPageSize:React.Dispatch<React.SetStateAction<number>>}) {
+export default function PaginationForm(props: {elementCount: number, page:number, pageSize:number, setPage:React.Dispatch<React.SetStateAction<number>>, setPageSize:React.Dispatch<React.SetStateAction<number>>, style:"normal" | "small"}) {
     
     function pageSizeOptions() {
         let options:any[] = [];
@@ -23,9 +23,9 @@ export default function PaginationForm(props: {elementCount: number, page:number
     }
 
     return (
-        <div className="pagination-form">
+        <div className={`pagination-form-${props.style}`}>
             <h4>Page</h4>
-            <div className="pagination-form__actions">
+            <div className={`pagination-form-${props.style}__actions`}>
                 <Button onClick={pageDown} label={"<"} style={"pagination"}/>
                 <div>{props.page}</div>
                 <Button onClick={pageUp} label={">"} style={"pagination"} />

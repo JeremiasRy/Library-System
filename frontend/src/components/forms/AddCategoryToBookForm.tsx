@@ -32,13 +32,14 @@ export default function AddCategoryToBookForm() {
 
     return (
         <>
-        <h5>Add category to book</h5>
+        <h4>Add category to book</h4>
         <PaginationForm 
         elementCount={categories.length} 
         page={page} 
         setPage={setPage} 
         pageSize={pageSize} 
         setPageSize={setPageSize}
+        style="small"
         />
         <SelectCategory 
         options={categories.filter(ctgry => !book.categories?.map(bookCtgry => bookCtgry.title).includes(ctgry.title))} 

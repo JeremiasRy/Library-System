@@ -57,7 +57,7 @@ export default function Loans() {
                 <Button onClick={() => setFilter(null)} label={"All"} style={"standard"} />
                 <Button onClick={() => setShowReturned(!showReturned)} label={showReturned ? "Show on going" : "Show returned" } style="standard" />
             </div>
-            <PaginationForm elementCount={loans.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize}/>
+            <PaginationForm elementCount={loans.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} style="normal" />
             <div className="loan-page__loans-wrapper">
                 {
                     showReturned 

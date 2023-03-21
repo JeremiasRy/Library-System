@@ -1,8 +1,19 @@
 @import "../abstraction/mixins.scss";
+@import "../abstraction/variables.scss";
 
 .main {
     display: flex;
     flex-direction: column;
+}
+.main__bg {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-image: url("../../../assets/book_case_tilt.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
 }
 .main__overlay {
     z-index: 1;
@@ -14,6 +25,8 @@
     background-image: linear-gradient(90deg, rgba($base_bg_dark, 0.1), rgba($base_bg_dark, 0.9) 20%, rgba($base_bg_dark, 0.9) 80%, rgba($base_bg_dark, 0.1));
 }
 .main__outlet-holder {
+    display: flex;
+    justify-content: center;
     padding-left: 10%;
     padding-right: 10%;
     min-height: 100%;
@@ -40,6 +53,19 @@ h1, h2, h3, h4, h5 {
     transition: ease-in 50ms;
 }
 
+.danger {
+    background-color: salmon;
+    border: 1px solid rgb(238, 34, 34);
+}
+
+.small {
+    font-size: small;
+    height: 1.5em;
+    width: 5em;
+    font-weight: 400;
+    border-radius: 0;
+}
+
 select {
     @include select();
     transition: ease-in 200ms;
@@ -51,4 +77,23 @@ option {
 select:hover {
     @include basic-hover();
     border-bottom: 2px solid black;
+}
+
+.input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid $nav_font_color_light_var1;
+    height: 3em;
+    min-width: 20em;
+    background-color: inherit;
+    color: $nav_font_color_light;
+    outline: none;
+    transition: all 100ms ease-in;
+}
+.input:focus {
+    transform: scaleX(1.1) translateX(5%);
+    border-bottom: 2px solid $nav_font_color_light;
+    color: white;
+    transition: all ease-in 100ms;
 }

@@ -58,29 +58,31 @@ export default function BookPage() {
     return (
         <div className="book-page">
             <div className="book-page__headers">
-                <h4>{book.title}</h4>
+                <h2>{book.title}</h2>
+                <div className="book-page__description">
+                    <p>{book.description}</p>
+                </div>
+                <h4>Authors</h4>
                 <div className="book-page__headers__authors">
                     {book.authors?.map(author =>
-                    <div key={author.id}>
+                    <div className="authors__author" key={author.id}>
                     <AuthorCard author={author} size="small" />
-                    {user?.roles.includes("Admin") && <Button onClick={() => removeAuthor(author.id)} label="Remove" style="danger" />}
+                    {edit && <Button onClick={() => removeAuthor(author.id)} label="Remove" style="danger small" />}
                     </div> )}
                 </div>
             </div>
-            <div className="book-page__description">
-                <p>{book.description}</p>
-            </div>
+            <h4>Categories</h4>
             <div className="book-page__categories">
                 {book.categories?.map(category => 
-                    <>
-                        <CategoryCard key={category.id} category={category} size="small" /> 
-                        {user?.roles.includes("Admin") && <Button onClick={() => removeCategory(category.id)} label="Remove" style="danger" />}
-                    </>)}
+                    <div key={category.id} className="book-page__categories__category">
+                        <CategoryCard category={category} size="small" /> 
+                        {edit && <Button onClick={() => removeCategory(category.id)} label="Remove" style="danger small" />}
+                    </div>)}
             </div>
             <div className="book-page__make-loan">
                 {book.copies?.filter(copy => copy.isAvailable).length === 0 
                 ? <h5>Sorry no copies available for loan</h5>
-                : <><h5>Loan this book</h5>
+                : <><h4>Loan this book</h4>
                 <SelectCopy options={book.copies?.filter(copy => copy.isAvailable) as Copy[]} state={copy} setState={setCopy} label={"Choose a copy to loan (check id)"} />
                 <Button onClick={loan} label="Loan" style="Standard" />
                 </>
@@ -92,7 +94,7 @@ export default function BookPage() {
             <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Show edit functions"} style={"standard"} />
                 {edit && <>
                 <div className="edit-form">
-                    <h5>Edit book</h5>
+                    <h4>Edit book</h4>
                     <TitleAndDescriptionForm updateObject={book} dispatchCreate={null} dispatchUpdate={updateBook as AsyncThunk<Book[] | undefined, unknown, {}> | null}/>
                 </div>
                 <div className="add-category-form">

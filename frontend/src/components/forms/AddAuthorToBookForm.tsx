@@ -31,13 +31,14 @@ export default function addAuthorToBookForm() {
     }
     return (
         <>
-        <h5>Add an author to book</h5>
+        <h4>Add an author to book</h4>
         <PaginationForm 
         elementCount={authors.length}
         page={page}
         setPage={setPage}
         pageSize={pageSize}
         setPageSize={setPageSize}
+        style="small"
         />
         <SelectAuthor 
         options={authors.filter(author => !book.authors?.map(author => author.id).includes(author.id))} 

@@ -1,10 +1,14 @@
 @import "../abstraction/mixins.scss";
 
-
-.books-page {
+.book-page {
+    min-width: 50%;
+    padding-top: 5em;
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+}
+.book-page h2, .book-page__description {
+    text-align: center;
 }
 .books-page__inner-wrap {
     display: flex;
@@ -13,6 +17,10 @@
     row-gap: 10px;
     padding-left: 5em;
     padding-right: 5em;
+}
+.book-page__headers {
+    display: flex;
+    flex-direction: column;
 }
 .book-card-small {
     @include card(center);
@@ -73,4 +81,61 @@
     row-gap: 10px;
     column-gap: 10px;
     justify-content:center;
+}
+.book-page__categories {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2em;
+}
+.book-page__categories__category {
+    display: flex;
+    flex-direction: row;
+    column-gap: 3em;
+}
+.book-page__categories__category .btn {
+    margin: auto 0;
+}
+.book-page__headers__authors {
+    display: flex;
+    flex-direction: row;
+    column-gap: 3em;
+}
+.authors__author {
+    display: flex;
+    flex-direction: row;
+    column-gap: 3em;
+}
+.authors__author .btn {
+    margin: auto 0;
+}
+.add-category-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.add-author-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.add-copy-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.title-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.book-page__admin-actions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.book-page__make-loan {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+    margin-bottom: 4em;
 }

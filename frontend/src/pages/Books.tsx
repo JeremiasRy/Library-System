@@ -29,7 +29,7 @@ export default function Books() {
         <div className="books-page">
             <h1>Books</h1>
             <div className="books-page__inner-wrap">
-                <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize}/>
+                <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize} style="normal"/>
                 <div className="books-page__books-wrapper">
                     {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
                 </div>

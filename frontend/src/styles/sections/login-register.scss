@@ -1,3 +1,22 @@
 .login-page {
     z-index: 2;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5em;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 2em;
+}
+
+.user-form h1 {
+    text-align: center;
+}
+
+.user-form__submit-button {
+    text-align: center;
 }

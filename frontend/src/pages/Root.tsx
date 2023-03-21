@@ -20,6 +20,7 @@ export default function Root() {
     return (
         <>
         <div className="main">
+            <div className="main__bg"></div>
             <div className="main__overlay"></div>
             <Notification />
             <NavBar />

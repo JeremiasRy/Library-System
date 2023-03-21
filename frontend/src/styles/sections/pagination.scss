@@ -1,18 +1,36 @@
 @import "../abstraction/variables.scss";
+@import "../abstraction/mixins.scss";
 
-.pagination-form {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    color: $nav_font_color_light
+.pagination-form-normal {
+    @include pagination-base();
 }
-.pagination-form h4 {
+.pagination-form-normal h4 {
     text-align: center;
 }
-.pagination-form__actions {
+.pagination-form-normal__actions {
     display: flex;
     flex-direction: row;
     justify-content: center;
     column-gap: 2em;
     width: 100%;
+}
+.pagination-form-small {
+    @include pagination-base;
+}
+.pagination-form-small h4 {
+    visibility: hidden;
+    margin: 0;
+}
+.pagination-form-small__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    column-gap: 1em;
+    width: 100%;
+}
+.pagination-form-small__actions .btn {
+    width: 3em;
+    min-width: 0px;
+    height: 2em;
+    font-size: small;
 }

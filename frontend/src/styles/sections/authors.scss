@@ -1,0 +1,11 @@
+@import "../abstraction/variables.scss";
+@import "../abstraction/mixins.scss";
+
+.author-card-small {
+    @include card-small();
+    font-weight: 700;
+    text-align: center;
+}
+.author-card-small:hover {
+    @include card-small-hover();
+}

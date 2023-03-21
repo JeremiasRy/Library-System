@@ -4,10 +4,12 @@ body {
     height: 100%;
     margin: 0;
     font-family: 'Roboto';
-    background-image: url("../../../assets/book_case_tilt.jpg");
-    background-position: center;
-    background-size: fill;
     color: $nav_font_color_light;
+}
+
+#root, #root > div, .main {
+    height: 100%;
+    width: 100%;
 }
 html {
     height: 100%;

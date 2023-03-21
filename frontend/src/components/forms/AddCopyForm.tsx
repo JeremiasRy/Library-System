@@ -35,8 +35,8 @@ export default function AddCopyForm(props: {book:Book}) {
 
     return (
         <>
-        <h5>Add a copy of book</h5>
-        <PaginationForm elementCount={publishers.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize}/>
+        <h4>Add a copy of book</h4>
+        <PaginationForm elementCount={publishers.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} style="small"/>
         <SelectPublisher options={publishers} state={publisher} setState={setPublisher} label={"Select publisher for copy"} />
         <Button onClick={submitAction} label={"Submit"} style={"standard"} />
         </>

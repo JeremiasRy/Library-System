@@ -46,17 +46,24 @@
 }
 
 @mixin card-small() {
-    background-color: $base_bg_dark;
-    color: $nav_font_color_light;
     transition: all 200ms;
     height: 3em;
     width: 10em;
     border-radius: 1em;
+    background-color: $nav_font_color_light;
+    color: $base_bg_dark;
 }
 
 @mixin card-small-hover {
     cursor: pointer;
-    background-color: $nav_font_color_light;
-    color: $base_bg_dark;
+    background-color: $base_bg_dark;
+    color: $nav_font_color_light;
     transition: all 200ms;
+}
+
+@mixin pagination-base {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: $nav_font_color_light
 }
