@@ -2,12 +2,9 @@
 
 using Backend.DTOs;
 using Backend.DTOs.User;
-using Backend.Models;
 using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 public class UserController : ApiBaseController
 {
@@ -26,19 +23,24 @@ public class UserController : ApiBaseController
         return Ok();
     }
     [HttpPost("register"), AllowAnonymous]
-    public async Task<UserResponseDTO?> SignUp(SignInDTO request)
+    public async Task<ActionResult<UserResponseDTO?>> SignUp(SignInDTO request)
     {
         var result = await _service.SignUpAsync(request);
         if (result is null)
         {
-            return null;
+            return BadRequest();
         }
-        return UserResponseDTO.FromUser(result);
+        return Ok(UserResponseDTO.FromUser(result));
     }
     [HttpPost("login"), AllowAnonymous]
-    public async Task<SignInResponseDTO?> Login(CredentialsDTO request)
+    public async Task<ActionResult<SignInResponseDTO?>> Login(CredentialsDTO request)
     {
-        return await _service.SignInAsync(request);
+        var result = await _service.SignInAsync(request);
+        if (result is null)
+        {
+            return BadRequest();
+        }
+        return Ok(result);
     }
     [HttpPost("roles"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddRole(RoleDTO request)

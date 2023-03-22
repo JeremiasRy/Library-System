@@ -15,17 +15,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services
-    .AddIdentity<User, IdentityRole<int>>(options =>
-    {
-        //To make development a bit easier
-        options.Password.RequireDigit = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequiredLength = 6;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireNonAlphanumeric = false;
-    })
-    .AddEntityFrameworkStores<AppDbContext>();
+
 
 builder.Services
     .AddAuthentication(options =>
@@ -59,6 +49,32 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services
+    .AddIdentity<User, IdentityRole<int>>(options =>
+    {
+        //To make development a bit easier
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+    })
+    .AddEntityFrameworkStores<AppDbContext>();
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(
+            policy =>
+            {
+                policy
+                    .WithOrigins("http://localhost:5173")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    });
+}
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -97,17 +113,6 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy
-                .WithOrigins("http://localhost:5173")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
 
 var app = builder.Build();
 
@@ -120,10 +125,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors();
 
 app.MapControllers();
 
