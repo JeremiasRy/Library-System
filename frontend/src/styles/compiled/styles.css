@@ -129,6 +129,7 @@ select:hover {
   color: #ecd5b7;
   outline: none;
   transition: all 100ms ease-in;
+  text-align: center;
 }
 
 .input:focus {
@@ -226,7 +227,7 @@ textarea:focus {
   padding-top: 5em;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: 2em;
 }
 
 .book-page h2, .book-page__description {
@@ -249,13 +250,19 @@ textarea:focus {
   text-align: center;
 }
 
+.books-page__books-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
 .books-page__inner-wrap {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  row-gap: 10px;
-  padding-left: 5em;
-  padding-right: 5em;
 }
 
 .book-page__headers {
@@ -649,19 +656,20 @@ textarea:focus {
 }
 
 .loan-page {
+  min-width: 50%;
+  padding-top: 5em;
   display: flex;
   flex-direction: column;
-  padding-top: 2.5em;
+  row-gap: 2em;
 }
 
 .loan-page__loans-wrapper {
-  padding-top: 3em;
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  row-gap: 1em;
-  column-gap: 1em;
+  row-gap: 10px;
+  column-gap: 10px;
   justify-content: center;
 }
 
@@ -718,9 +726,6 @@ textarea:focus {
 .login-page {
   z-index: 2;
   margin: auto auto;
-  display: flex;
-  flex-direction: column;
-  row-gap: 5em;
 }
 
 .user-form {

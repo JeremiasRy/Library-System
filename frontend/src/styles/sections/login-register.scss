@@ -1,9 +1,8 @@
+@import "../abstraction/mixins.scss";
+
 .login-page {
     z-index: 2;
     margin: auto auto;
-    display: flex;
-    flex-direction: column;
-    row-gap: 5em;
 }
 
 .user-form {

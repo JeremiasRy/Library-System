@@ -2,27 +2,13 @@
 @import "../abstraction/mixins.scss";
 
 .authors-page {
-    min-width: 50%;
-    padding-top: 5em;
-    display: flex;
-    flex-direction: column;
-    row-gap: 2em;
+    @include base-page-layout();
 }
 .author-page {
-    min-width: 50%;
-    padding-top: 5em;
-    display: flex;
-    flex-direction: column;
-    row-gap: 2em;
+    @include base-page-layout();
 }
 .author-page__authors {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 10px;
-    column-gap: 10px;
-    justify-content:center;
+    @include base-wrapper();
 }
 .author-card-large {
     min-height: 15em;

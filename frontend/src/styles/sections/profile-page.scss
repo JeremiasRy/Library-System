@@ -2,11 +2,7 @@
 @import "../abstraction/variables.scss";
 
 .profile-page {
-    min-width: 50%;
-    padding-top: 5em;
-    display: flex;
-    flex-direction: column;
-    row-gap: 2em;
+    @include base-page-layout();
 }
 .profile-page__actions {
     display: flex;

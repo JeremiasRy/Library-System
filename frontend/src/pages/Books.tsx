@@ -37,7 +37,7 @@ export default function Books() {
             <h1>Books</h1>
             <div className="books-page__inner-wrap">
                 <PaginationForm elementCount={books.length} page={page} pageSize={pageSize} setPage={setPage} setPageSize={setPageSize} style="normal"/>
-                <input className="book-search" placeholder="Search by title" value={title} onChange={(e) => setTitle(e.currentTarget.value)}/>
+                <input className="book-search" placeholder="Search by title" value={title} onChange={(e) => setTitle(e.currentTarget.value)}/><br/>
                 <div className="books-page__books-wrapper">
                     {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
                 </div>

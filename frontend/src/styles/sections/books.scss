@@ -1,11 +1,7 @@
 @import "../abstraction/mixins.scss";
 
 .book-page {
-    min-width: 50%;
-    padding-top: 5em;
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    @include base-page-layout();
 }
 .book-page h2, .book-page__description {
     text-align: center;
@@ -25,13 +21,12 @@
     transition: all 100ms ease-in;
     text-align: center;
 }
+.books-page__books-wrapper{
+    @include base-wrapper();
+}
 .books-page__inner-wrap {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    row-gap: 10px;
-    padding-left: 5em;
-    padding-right: 5em;
 }
 .book-page__headers {
     display: flex;

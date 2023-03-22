@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";
 import { RootState } from "../store";
+import { addNotification } from "./notificationReducer";
+import { logout } from "./userReducer";
 
 export const baseUrl = "https://localhost:7073/";
 
@@ -18,9 +20,13 @@ export function getAll<T>(endpoint:string, name:string) {
                         headers: { Authorization: `Bearer ${state.user?.token}` }, 
                         params: pagination === null ? {} : { page: pagination.page, pageSize: pagination.pageSize }
                     })
+                    
                 return response.data as T[]
             } catch (e:any) {
-                console.log(e);
+                if (e.status === 401) {
+                    thunkAPI.dispatch(logout())
+                    thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
+                }
             }
         }
     ) 
@@ -39,6 +45,10 @@ export function get<T>(endpoint:string, name:string) {
                 console.log(response.status);
                 return response.data as T[];
             } catch (e:any) {
+                if (e.status === 401) {
+                    thunkAPI.dispatch(logout())
+                    thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
+                }
                 console.log(e);
             }
         }
@@ -61,6 +71,10 @@ export function create<TNew, TReturn>(endpoint:string, name:string) {
                 )
                 thunkAPI.dispatch(getAll<TReturn>(endpoint, name)(null));
             } catch(e:any) {
+                if (e.status === 401) {
+                    thunkAPI.dispatch(logout())
+                    thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
+                }
                 console.log(e);
             }
             
@@ -84,6 +98,10 @@ export function update<TUp extends Base>(endpoint:string, name:string) {
                 );
                 return result.data as TUp[];
             } catch (e:any) {
+                if (e.status === 401) {
+                    thunkAPI.dispatch(logout())
+                    thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
+                }
                 console.log(e);
             }
         }
@@ -107,6 +125,10 @@ export function remove<T extends Base>(endpoint:string, name:string) {
                     throw new Error("Delete operation failed")
                 }
             } catch (e:any) {
+                if (e.status === 401) {
+                    thunkAPI.dispatch(logout())
+                    thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
+                }
                 console.log(e);
             }
         }

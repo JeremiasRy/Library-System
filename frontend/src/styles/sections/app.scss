@@ -80,18 +80,7 @@ select:hover {
 }
 
 .input {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid $nav_font_color_light_var1;
-    height: 3em;
-    font-size: large;
-    font-weight: 700;
-    min-width: 20em;
-    background-color: inherit;
-    color: $nav_font_color_light;
-    outline: none;
-    transition: all 100ms ease-in;
+    @include input();
 }
 .input:focus {
     transform: scaleX(1.1) translateX(5%);
