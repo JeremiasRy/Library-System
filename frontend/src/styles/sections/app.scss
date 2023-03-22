@@ -85,6 +85,8 @@ select:hover {
     border-right: none;
     border-bottom: 2px solid $nav_font_color_light_var1;
     height: 3em;
+    font-size: large;
+    font-weight: 700;
     min-width: 20em;
     background-color: inherit;
     color: $nav_font_color_light;
@@ -96,4 +98,28 @@ select:hover {
     border-bottom: 2px solid $nav_font_color_light;
     color: white;
     transition: all ease-in 100ms;
+}
+
+textarea {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid $nav_font_color_light_var1;
+    background-color: inherit;
+    color: $nav_font_color_light;
+    min-height: 7.5em;
+    min-width: 20em;
+    outline: none;
+}
+textarea:focus {
+    transform: scaleX(1.05) translateX(5%);
+    border-bottom: 2px solid $nav_font_color_light;
+    color: white;
+    transition: all ease-in 100ms;
+}
+
+.title-form__text-fields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
 }

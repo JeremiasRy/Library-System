@@ -6,7 +6,7 @@
     position: sticky;
     top: 0px;
     left: 0px;
-    min-height: 5em;
+    min-height: fit-content;
     padding-left: 2em;
     padding-right: 2em;
     display: flex;
@@ -26,8 +26,8 @@
 .navbar__nav-elements {
     display: flex;
     flex-direction: row;
-    column-gap: 5em;
-    justify-content: space-evenly;
+    column-gap: 2em;
+    justify-content: right;
 }
 
 .nav-element {

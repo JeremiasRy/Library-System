@@ -39,6 +39,7 @@ export default function PublisherPage() {
             <div className="publisher-page__headers">
                 <h1>{publisher.publisherName}</h1>
             </div>
+            <h4>Books from {publisher.publisherName}</h4>
             <div className="publisher-page__books">
                 {books.map(book => <BookCard key={book.id} book={book} size="small"/>)}
             </div>

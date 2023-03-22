@@ -3,7 +3,6 @@ import axios from "axios"
 import { Base } from "../../types/base";
 import { Pagination } from "../../types/pagination";
 import { RootState } from "../store";
-import { getAllCategories } from "./categoryReducer";
 
 export const baseUrl = "https://localhost:7073/";
 
@@ -37,6 +36,7 @@ export function get<T>(endpoint:string, name:string) {
                     {
                         headers: { Authorization: `Bearer ${state.user?.token}` }
                     })
+                console.log(response.status);
                 return response.data as T[];
             } catch (e:any) {
                 console.log(e);

@@ -1,0 +1,32 @@
+@import "../abstraction/mixins.scss";
+@import "../abstraction/variables.scss";
+
+.profile-page {
+    min-width: 50%;
+    padding-top: 5em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.profile-page__actions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.profile-page__actions .loans-link {
+    @include card-small();
+    display: flex;
+    align-items: center;
+}
+
+.loans-link h4 {
+    color: $base_bg_dark;
+    margin: auto;
+}
+
+.profile-page__actions .loans-link:hover {
+    @include card-small-hover();
+}
+.loans-link:hover h4 {
+    color: $nav_font_color_light;
+}

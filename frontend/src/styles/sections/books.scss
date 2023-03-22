@@ -10,6 +10,21 @@
 .book-page h2, .book-page__description {
     text-align: center;
 }
+.book-search {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid $nav_font_color_light_var1;
+    height: 3em;
+    font-size: large;
+    font-weight: 700;
+    min-width: 20em;
+    background-color: inherit;
+    color: $nav_font_color_light;
+    outline: none;
+    transition: all 100ms ease-in;
+    text-align: center;
+}
 .books-page__inner-wrap {
     display: flex;
     flex-direction: column;
@@ -23,7 +38,7 @@
     flex-direction: column;
 }
 .book-card-small {
-    @include card(center);
+    @include card(center, "../../../assets/open_book.jpg");
     text-align: center;
 }
 .book-card-small:hover {
@@ -108,22 +123,7 @@
 .authors__author .btn {
     margin: auto 0;
 }
-.add-category-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-}
-.add-author-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-}
-.add-copy-form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-}
-.title-form {
+.form {
     display: flex;
     flex-direction: column;
     row-gap: 1em;

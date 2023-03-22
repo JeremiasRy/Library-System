@@ -1,21 +1,21 @@
-@import "../abstraction/variables.scss";
 @import "../abstraction/mixins.scss";
+@import "../abstraction/variables.scss";
 
-.authors-page {
+.publishers-page {
     min-width: 50%;
     padding-top: 5em;
     display: flex;
     flex-direction: column;
     row-gap: 2em;
 }
-.author-page {
+.publisher-page {
     min-width: 50%;
     padding-top: 5em;
     display: flex;
     flex-direction: column;
     row-gap: 2em;
 }
-.author-page__authors {
+.publisher-page__books {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -24,7 +24,17 @@
     column-gap: 10px;
     justify-content:center;
 }
-.author-card-large {
+.publisher-page__publishers {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content:center;
+}
+
+.publisher-card {
     min-height: 15em;
     width: 15em;
     padding: 1em;
@@ -34,20 +44,12 @@
     border: 1px rgb(170, 166, 166) solid;
     transition: all ease-in 200ms;
 }
-.author-card-large:hover {
+.publisher-card:hover {
     cursor: pointer;
     transform: scale3d(1.03, 1.03, 1.03);
     background-image: linear-gradient(45deg, $base_bg_dark 50%, $base_bg_light_variation);
     transition: all ease-in 200ms;
 }
-.author-card-large h4 {
+.publisher-card h4 {
     font-size: larger;
-}
-.author-card-small {
-    @include card-small();
-    font-weight: 700;
-    text-align: center;
-}
-.author-card-small:hover {
-    @include card-small-hover();
 }

@@ -122,6 +122,8 @@ select:hover {
   border-right: none;
   border-bottom: 2px solid #fffdf9;
   height: 3em;
+  font-size: large;
+  font-weight: 700;
   min-width: 20em;
   background-color: inherit;
   color: #ecd5b7;
@@ -136,12 +138,37 @@ select:hover {
   transition: all ease-in 100ms;
 }
 
+textarea {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #fffdf9;
+  background-color: inherit;
+  color: #ecd5b7;
+  min-height: 7.5em;
+  min-width: 20em;
+  outline: none;
+}
+
+textarea:focus {
+  transform: scaleX(1.05) translateX(5%);
+  border-bottom: 2px solid #ecd5b7;
+  color: white;
+  transition: all ease-in 100ms;
+}
+
+.title-form__text-fields {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
 .navbar {
   z-index: 3;
   position: sticky;
   top: 0px;
   left: 0px;
-  min-height: 5em;
+  min-height: fit-content;
   padding-left: 2em;
   padding-right: 2em;
   display: flex;
@@ -165,8 +192,8 @@ select:hover {
 .navbar__nav-elements {
   display: flex;
   flex-direction: row;
-  column-gap: 5em;
-  justify-content: space-evenly;
+  column-gap: 2em;
+  justify-content: right;
 }
 
 .nav-element {
@@ -203,6 +230,22 @@ select:hover {
 }
 
 .book-page h2, .book-page__description {
+  text-align: center;
+}
+
+.book-search {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #fffdf9;
+  height: 3em;
+  font-size: large;
+  font-weight: 700;
+  min-width: 20em;
+  background-color: inherit;
+  color: #ecd5b7;
+  outline: none;
+  transition: all 100ms ease-in;
   text-align: center;
 }
 
@@ -333,25 +376,7 @@ select:hover {
   margin: auto 0;
 }
 
-.add-category-form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
-}
-
-.add-author-form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
-}
-
-.add-copy-form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
-}
-
-.title-form {
+.form {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
@@ -416,6 +441,42 @@ select:hover {
   font-size: small;
 }
 
+.categories-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.category-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.category-page__books-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
+.categories-page__categories-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
 .category-card-small {
   transition: all 200ms;
   height: 3em;
@@ -433,6 +494,56 @@ select:hover {
   background-color: #241515;
   color: #ecd5b7;
   transition: all 200ms;
+}
+
+.category-card-large {
+  perspective: 5px;
+  min-height: 15em;
+  width: 15em;
+  padding: 1em;
+  background-image: url("../../assets/book_case_straight.jpg");
+  background-position: center;
+  background-size: contain;
+  color: yellow;
+  border-radius: 1em;
+  border: 1px rgb(170, 166, 166) solid;
+  transition: all ease-out 200ms;
+}
+
+.category-card-large h4 {
+  font-size: larger;
+  transition: all 200ms ease-in;
+}
+
+.category-card-large:hover {
+  cursor: pointer;
+  transform: scale3d(1.03, 1.03, 1.03);
+  transition: all 200ms ease-in;
+}
+
+.category-card-large:hover .overlay {
+  background-image: linear-gradient(45deg, rgba(36, 21, 21, 0.6) 50%, rgba(182, 179, 179, 0.8));
+  transition: all 200ms ease-in;
+}
+
+.category-card-large:hover h4 {
+  letter-spacing: 5px;
+  transition: all 200ms ease-in;
+}
+
+.category-card-large .overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 1em;
+  background-color: rgba(36, 21, 21, 0.5);
+}
+
+.category-card-large .details {
+  position: relative;
+  z-index: 1;
 }
 
 .closed {
@@ -471,6 +582,54 @@ select:hover {
   color: black;
 }
 
+.authors-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.author-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.author-page__authors {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
+.author-card-large {
+  min-height: 15em;
+  width: 15em;
+  padding: 1em;
+  background-image: linear-gradient(45deg, rgba(36, 21, 21, 0.6) 50%, rgba(182, 179, 179, 0.8));
+  color: yellow;
+  border-radius: 1em;
+  border: 1px rgb(170, 166, 166) solid;
+  transition: all ease-in 200ms;
+}
+
+.author-card-large:hover {
+  cursor: pointer;
+  transform: scale3d(1.03, 1.03, 1.03);
+  background-image: linear-gradient(45deg, #241515 50%, #b6b3b3);
+  transition: all ease-in 200ms;
+}
+
+.author-card-large h4 {
+  font-size: larger;
+}
+
 .author-card-small {
   transition: all 200ms;
   height: 3em;
@@ -487,6 +646,73 @@ select:hover {
   background-color: #241515;
   color: #ecd5b7;
   transition: all 200ms;
+}
+
+.loan-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2.5em;
+}
+
+.loan-page__loans-wrapper {
+  padding-top: 3em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 1em;
+  column-gap: 1em;
+  justify-content: center;
+}
+
+.loan-page__filter-options {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2em;
+  width: 90%;
+  justify-content: center;
+}
+
+.loan-card-small {
+  perspective: 5px;
+  min-height: 15em;
+  width: 15em;
+  padding: 1em;
+  background-image: url("../../../assets/blank_wood_bg.jpg");
+  background-position: center;
+  background-size: contain;
+  color: yellow;
+  border-radius: 1em;
+  border: 1px rgb(170, 166, 166) solid;
+  transition: all ease-out 200ms;
+}
+
+.loan-card-small:hover {
+  cursor: pointer;
+  transform: scale3d(1.03, 1.03, 1.03);
+}
+
+.loan-card-small:hover .overlay {
+  cursor: pointer;
+  transform: scale3d(1.03, 1.03, 1.03);
+  background-image: linear-gradient(45deg, rgba(36, 21, 21, 0.6) 50%, rgba(182, 179, 179, 0.8));
+  transition: all 200ms ease-in;
+}
+
+.loan-card-small .overlay {
+  position: absolute;
+  border-radius: 1em;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, rgba(36, 21, 21, 0.4) 50%, rgba(182, 179, 179, 0.4));
+}
+
+.loan-card-small .details {
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .login-page {
@@ -510,6 +736,105 @@ select:hover {
 
 .user-form__submit-button {
   text-align: center;
+}
+
+.profile-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.profile-page__actions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.profile-page__actions .loans-link {
+  transition: all 200ms;
+  height: 3em;
+  width: 10em;
+  border-radius: 1em;
+  background-color: #ecd5b7;
+  color: #241515;
+  display: flex;
+  align-items: center;
+}
+
+.loans-link h4 {
+  color: #241515;
+  margin: auto;
+}
+
+.profile-page__actions .loans-link:hover {
+  cursor: pointer;
+  background-color: #241515;
+  color: #ecd5b7;
+  transition: all 200ms;
+}
+
+.loans-link:hover h4 {
+  color: #ecd5b7;
+}
+
+.publishers-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.publisher-page {
+  min-width: 50%;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+}
+
+.publisher-page__books {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
+.publisher-page__publishers {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-content: center;
+}
+
+.publisher-card {
+  min-height: 15em;
+  width: 15em;
+  padding: 1em;
+  background-image: linear-gradient(45deg, rgba(36, 21, 21, 0.6) 50%, rgba(182, 179, 179, 0.8));
+  color: yellow;
+  border-radius: 1em;
+  border: 1px rgb(170, 166, 166) solid;
+  transition: all ease-in 200ms;
+}
+
+.publisher-card:hover {
+  cursor: pointer;
+  transform: scale3d(1.03, 1.03, 1.03);
+  background-image: linear-gradient(45deg, #241515 50%, #b6b3b3);
+  transition: all ease-in 200ms;
+}
+
+.publisher-card h4 {
+  font-size: larger;
 }
 
 /*# sourceMappingURL=styles.css.map */

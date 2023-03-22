@@ -14,9 +14,12 @@ export default function Profile() {
         <div className="profile-page">
             <div className="progile-page__header">
                 <h2>Hello {user?.firstname} {user?.lastname}</h2>
+                <p>Your roles here are: <em>{user?.roles.map(role => `${role} `)}</em></p>
             </div>
             <div className="profile-page__actions">
-                <h4 onClick={() => navigate("/loans")}>Your loans</h4>
+                <div className="loans-link" onClick={() => navigate("/loans")}>
+                    <h4>Your loans</h4>
+                </div>
                 <Button onClick={() => setEdit(!edit)} label={edit ? "Hide" : "Edit information"} style={"standard"} />
             </div>
             {edit &&

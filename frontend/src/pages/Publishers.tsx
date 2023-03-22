@@ -27,7 +27,7 @@ export default function Publishers() {
     return (
         <div className="publishers-page">
             <h1>Publishers</h1>
-            <PaginationForm elementCount={publishers.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize}/>
+            <PaginationForm elementCount={publishers.length} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} style="normal" />
             <div className="publisher-page__publishers">
                 {publishers.map(publisher => <PublisherCard key={publisher.id} publisher={publisher} size="large"/>)}
             </div>

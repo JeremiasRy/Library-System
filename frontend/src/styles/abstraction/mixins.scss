@@ -27,14 +27,14 @@
     min-width: 5em;
 }
 
-@mixin card($bg-position) {
+@mixin card($bg-position, $bg-url) {
     perspective: 5px;
     min-height: 15em;
     width: 15em;
     padding: 1em;
-    background-image: url("../../../assets/open_book.jpg");
-    background-position:$bg-position;
-    background-size:contain;
+    background-image: url($bg_url);
+    background-position: $bg-position;
+    background-size: contain;
     color: yellow;
     border-radius: 1em;
     border: 1px rgb(170, 166, 166) solid;

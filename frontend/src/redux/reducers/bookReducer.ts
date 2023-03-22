@@ -28,7 +28,13 @@ const bookReducer = createSlice({
         });
         builder.addCase(getBooksByPublisher.fulfilled, (_, action) => {
             return action.payload;
-        })
+        });
+        builder.addCase(getBooksByAuthor.fulfilled, (_, action) => {
+            return action.payload;
+        });
+        builder.addCase(getBooksByTitle.fulfilled, (_, action) => {
+            return action.payload;
+        });
     }
 })
 
@@ -39,6 +45,23 @@ export const getBookById = get<Book>("Books", "getBookById");
 export const createBook = create<PostBook, Book>("Books", "createBook");
 export const updateBook = update<Book>("Books", "updateBook");
 export const deleteBook = remove<Book>("Books", "deleteBook");
+export const getBooksByAuthor = createAsyncThunk(
+    "getBooksByAuthor",
+    async (authorId:number, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.get(
+                `${baseUrl}Books/filter`,
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: { author: authorId }
+                });
+            return result.data as Book[];
+        } catch (e:any) {
+            console.log(e);
+        }
+    }
+)
 export const getBooksByPublisher = createAsyncThunk(
     "getBooksByPublisher",
     async (publisherId:number, thunkAPI) => {
@@ -73,6 +96,23 @@ export const getBooksByCategory = createAsyncThunk(
         }
     }
 );
+export const getBooksByTitle = createAsyncThunk(
+    "getBooksByTitle",
+    async (title:string, thunkAPI) => {
+        try {
+            let state:RootState = thunkAPI.getState() as RootState;
+            let result = await axios.get(
+                `${baseUrl}Books/filter`,
+                {
+                    headers: {Authorization: `Bearer ${state.user?.token}`},
+                    params: { title: title }
+                });
+            return result.data as Book[];
+        } catch (e:any) {
+            console.log(e);
+        }
+    }
+)
 export const addCategoryToBook = createAsyncThunk(
     "addCategoryToBook",
     async (assign:Assign, thunkAPI) => {

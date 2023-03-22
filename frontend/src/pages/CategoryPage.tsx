@@ -38,6 +38,7 @@ export default function CategoryPage() {
         <div className="category-page">
             <div className="category-page__headers">
                 <h1>{category.title}</h1>
+                <p>{category.description}</p>
                 <h4>Books in this category: {books.length}</h4>
             </div>
             <div className="category-page__books-wrapper">

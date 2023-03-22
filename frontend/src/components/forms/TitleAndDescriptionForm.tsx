@@ -44,8 +44,10 @@ export default function TitleAndDescriptionForm<T extends HasTitleAndDescription
     return (
         <div className="title-form">
             <div className="title-form__text-fields">
-                <InputText type="text" state={title} setState={setTitle} label="Enter Title" style="standard"/>
-                <InputText type="text" state={description} setState={setDescription} label="Enter Description" style="standard"/>
+                <InputText type="text" state={title} setState={setTitle} label="Edit Title" style="standard"/>
+                <label> Edit description <br/><br/>
+                <textarea value={description} onChange={(e) => setDescription(e.currentTarget.value)} />
+                </label>
             </div>
             <Button label="Submit" onClick={submitAction} style="standard"/>
         </div>
