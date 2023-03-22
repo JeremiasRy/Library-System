@@ -97,13 +97,13 @@ export default function BookPage() {
                     <h4>Edit book</h4>
                     <TitleAndDescriptionForm updateObject={book} dispatchCreate={null} dispatchUpdate={updateBook as AsyncThunk<Book[] | undefined, unknown, {}> | null}/>
                 </div>
-                <div className="add-category-form">
+                <div className="add-category form">
                     <AddCategoryToBookForm />
                 </div>
-                <div className="add-author-form">
+                <div className="add-author form">
                     <AddAuthorToBookForm />
                 </div>
-                <div className="add-copy-form">
+                <div className="add-copy form">
                     <AddCopyForm book={book} />
                 </div>
                 <div>
