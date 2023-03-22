@@ -1,7 +1,6 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AuthorCard from "../components/cards/AuthorCard";
 import BookCard from "../components/cards/BookCard";
 import AuthorForm from "../components/forms/AuthorForm";
 import Button from "../components/inputs/Button";

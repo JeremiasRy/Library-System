@@ -1,5 +1,5 @@
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AuthorCard from "../components/cards/AuthorCard";
 import AuthorForm from "../components/forms/AuthorForm";
 import PaginationForm from "../components/forms/PaginationForm";

@@ -6,7 +6,7 @@ import PublisherForm from "../components/forms/PublisherForm";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook"
 import { getBooksByPublisher } from "../redux/reducers/bookReducer";
-import { deletePublisher, getAllPublishers, getPublisherById, updatePublisher } from "../redux/reducers/publisherReducer";
+import { deletePublisher, getPublisherById, updatePublisher } from "../redux/reducers/publisherReducer";
 import { Publisher } from "../types/publisher";
 
 export default function PublisherPage() {

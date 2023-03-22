@@ -4,6 +4,7 @@ import LoanCard from "../components/cards/LoanCard";
 import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getLoanById, updateLoan } from "../redux/reducers/loanReducer";
+import { addNotification } from "../redux/reducers/notificationReducer";
 import { Loan } from "../types/loan";
 
 export default function LoanPage() {
@@ -20,9 +21,8 @@ export default function LoanPage() {
     }
     function extendLoan() {
         let timeFromInitialLoan = new Date(loan.dueDate).valueOf() - new Date(loan.loanedAt).valueOf();
-        console.log(timeFromInitialLoan);
         if (timeFromInitialLoan > 5259600000) {
-            // notify can't extend
+            dispatch(addNotification({message: "Can't extend anymore", timeInSec: 2, type: "normal"}))
             return;
         }
         let newDueDate = new Date(loan.dueDate).setMonth(new Date(loan.dueDate).getMonth() + 1).valueOf();

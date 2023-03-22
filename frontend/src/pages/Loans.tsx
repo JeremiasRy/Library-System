@@ -5,7 +5,6 @@ import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { getAllLoans, getLoansByUser } from "../redux/reducers/loanReducer";
 import { LoanFilter } from "../types/loan";
-import { Pagination } from "../types/pagination";
 
 export default function Loans() {
     const user = useAppSelector(state => state.user);

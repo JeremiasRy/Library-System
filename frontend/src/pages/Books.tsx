@@ -7,7 +7,6 @@ import Button from "../components/inputs/Button";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { createBook, getAllBooks, getBooksByTitle } from "../redux/reducers/bookReducer";
 import { Book } from "../types/book";
-import { Pagination } from "../types/pagination";
 
 export default function Books() {
     const user = useAppSelector(state => state.user);

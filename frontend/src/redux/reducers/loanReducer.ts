@@ -3,7 +3,6 @@ import axios from "axios";
 import { Loan, LoanFilter, MakeLoan, UpdateLoan } from "../../types/loan";
 import { RootState } from "../store";
 import { baseUrl } from "./baseActions";
-import { getBookById } from "./bookReducer";
 
 const initialState:Loan[] = [];
 
