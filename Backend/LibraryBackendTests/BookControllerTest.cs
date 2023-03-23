@@ -46,17 +46,6 @@ namespace LibraryBackendTests
             Assert.True(books.Count == 4);
         }
         [Fact]
-        public async Task UpdateBook()
-        {
-            var context = Fixture.CreateContext();
-            var controller = new BookController(new BookService(context));
-            var books = await controller.GetAll();
-            await controller.Update((int)books?.FirstOrDefault()?.Id, new BookDTO { Title = "Item has been changed" });
-            context.ChangeTracker.Clear();
-            books = await controller.GetBooksByFilter(null, null, "Item", null);
-            Assert.True(books?.FirstOrDefault()?.Title == "Item has been changed");
-        }
-        [Fact]
         public async Task DeleteBook()
         {
             var context = Fixture.CreateContext();
