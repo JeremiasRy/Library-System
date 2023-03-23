@@ -14,6 +14,7 @@ public abstract class DbCrudService<TModel, TDto> : ICrudService<TModel, TDto>
 
     public virtual async Task<TModel?> CreateAsync(TDto request)
     {
+        var items = _dbContext.Books;
         TModel item = new();
         request.UpdateModel(item);
         _dbContext.Add(item);

@@ -22,14 +22,28 @@ public abstract class CrudController<TModel, TDto> : ApiBaseController
         return await _service.GetByIdAsync(id);
     }
     [HttpPost]
-    public virtual async Task<TModel?> Post([FromBody] TDto request)
+    public virtual async Task<ActionResult<TModel?>> Post([FromBody] TDto request)
     {
-        return await _service.CreateAsync(request);
+        try
+        {
+            return await _service.CreateAsync(request);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
     [HttpPut("{id:int}"), Authorize(Roles = "Admin")]
-    public virtual async Task<TModel?> Update([FromRoute] int id, [FromBody] TDto request)
+    public virtual async Task<ActionResult<TModel?>> Update([FromRoute] int id, [FromBody] TDto request)
     {
-        return await _service.UpdateAsync(id, request);
+        try
+        {
+            return await _service.UpdateAsync(id, request);
+        } catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        
     }
     [HttpDelete("{id:int}"), Authorize(Roles = "Admin")]
     public virtual async Task<bool> Delete([FromRoute] int id)
