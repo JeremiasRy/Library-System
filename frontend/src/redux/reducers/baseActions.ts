@@ -42,7 +42,6 @@ export function get<T>(endpoint:string, name:string) {
                     {
                         headers: { Authorization: `Bearer ${state.user?.token}` }
                     })
-                console.log(response.status);
                 return response.data as T[];
             } catch (e:any) {
                 if (e.status === 401) {
@@ -129,7 +128,6 @@ export function remove<T extends Base>(endpoint:string, name:string) {
                     thunkAPI.dispatch(logout())
                     thunkAPI.dispatch(addNotification({message: "Session timed out", timeInSec: 2, type: "normal"}))
                 }
-                console.log(e);
             }
         }
     )
