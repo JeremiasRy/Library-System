@@ -19,3 +19,5 @@ You'll need to have postgres on your local machine and create an empty database.
 ## About the project
 
 It's a imaginary library system. You can make loans from copies of books. It has user functions with JWTauthorization and different admin functions separated from customer functions. There are still lot's to improve on my base design. I made all the styling in frontend by myself using SASS.
+
+![demo](https://github.com/JeremiasRy/fs13-FullStack/blob/main/Vite%20%2B%20React%20%2B%20TS%20-%20Google%20Chrome%202023-03-23%2012-35-29.gif)
